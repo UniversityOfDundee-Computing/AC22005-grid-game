@@ -1,9 +1,13 @@
 ﻿using System;
 
-public class FileIO
+namespace PegGui
 {
-	public FileIO()
-	{
-		Console.WriteLine("Called FILEIO");
-	}
+    public static class FileIO
+    {
+        public static Board ReadBoardFile()
+        {
+            return new Board();
+        }
+    }
+
 }

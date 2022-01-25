@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
-public class Board
+namespace PegGui
 {
-	int _Height = 9;
-	int _Width = 9;
-	List<Coord[2]> history = new List<Coord[2]>;
-
-	public Board()
+	public class Board
 	{
+		List<Tuple<Coord, Coord>> history = new List<Tuple<Coord, Coord>> { };
+		public Peg[,] board = new Peg[9, 9];
+
+		public Board()
+		{
+		}
+
+		public Board(Peg[,] grid)
+		{
+			board = grid;
+		}
 	}
+
 }

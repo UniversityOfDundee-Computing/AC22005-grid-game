@@ -1,12 +1,16 @@
 ﻿using System;
 
-public class Coord
+namespace PegGui
 {
-	int x { get; set; }
-	int y { get; set; }
-	public Coord(int x, int y)
+	public class Coord
 	{
-		this.x = x;
-		this.y = y;
+		int x { get; set; }
+		int y { get; set; }
+		public Coord(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
+		}
 	}
+
 }
