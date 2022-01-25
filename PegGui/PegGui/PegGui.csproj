@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bitmap.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Peg.cs" />
     <Compile Include="Coord.cs" />

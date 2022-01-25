@@ -8,6 +8,12 @@ namespace PegGui
     {
         public static Board ReadBoardFile(String name)
         {
+            byte[] bitmapData = File.ReadAllBytes("./maps/" + name + ".bmp");
+
+            Bitmap bmp = new Bitmap(bitmapData);
+
+
+
             return new Board();
         }
 
