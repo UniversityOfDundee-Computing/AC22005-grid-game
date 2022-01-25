@@ -83,7 +83,7 @@ namespace PegGui
             this.headerType = Encoding.ASCII.GetString(chopArray(b, 0, 2));
             if (this.headerType != "BM")
             {
-                throw new Exception("Unrecognised Bitmap Format - Only modern Windows bitmaps are supported (BM header)");
+                throw new Exception("Unrecognised Bitmap Format - Only modern Windows bitmaps are supported (BM header) - attempted: " + this.headerType);
             }
             this.bmpSize = BitConverter.ToInt32(chopArray(b, 2, 4), 0);
             this.reserved0 = BitConverter.ToChar(chopArray(b, 6, 2), 0);
@@ -95,7 +95,7 @@ namespace PegGui
 
             if (this.headerSize != 40)
             {
-                throw new Exception("Unrecognised Bitmap Format - Only modern Windows bitmaps are supported (BITMAPINFOHEADER / 40 byte header)");
+                throw new Exception("Unrecognised Bitmap Format - Only modern Windows bitmaps are supported (BITMAPINFOHEADER / 40 byte header) - attempted: " + this.headerSize + " bytes");
             }
             this.width = BitConverter.ToInt32(chopArray(b, 18, 4), 0);
             this.height = BitConverter.ToInt32(chopArray(b, 22, 4), 0);
@@ -105,7 +105,7 @@ namespace PegGui
             
             if (this.compression != CompressionFormats.BI_RGB)
             {
-                throw new Exception("Unrecognised Bitmap Format - Only Uncompressed bitmaps are supported");
+                throw new Exception("Unrecognised Bitmap Format - Only Uncompressed bitmaps are supported - attempted:" + this.compression.ToString());
             }
 
             this.imageSize = BitConverter.ToInt32(chopArray(b, 34, 4), 0);
@@ -232,16 +232,37 @@ namespace PegGui
                         }
                         break;
                     case (char)8:
-                        throw new NotImplementedException();
+                        while (_X < this.width) // While we have not completed a row
+                        {
+                            for (int k = 0; k < rowSize && _X < this.width; k++) // Itterate over the bytes in a row
+                            {
+                                pixelData[this.height - 1 - _Y, _X] = pallet[b[j + k]];
+                                _X++;
+                            }
+                        }
                         break;
-                    case (char)16:
-                        throw new NotImplementedException();
+                    case (char)24: // Tested - Works 25/01/2022 - Adam Mathieson
+                        while (_X < this.width) // While we have not completed a row
+                        {
+                            for (int k = 0; k < rowSize && _X < this.width; k+=3) // Itterate over the bytes in a row
+                            {
+                                pixelData[this.height - 1 - _Y, _X] = new PixelColour(b[j + k + 2], b[j + k + 1], b[j + k + 0], 0xff); // Colours in BGR order
+                                _X++;
+                            }
+                        }
                         break;
-                    case (char)24:
-                        throw new NotImplementedException();
+                    case (char) 32: // Untested - Paint.net only outputs BITMAPV5HEADER for 32bpp images but should theoratically work
+                        while (_X < this.width) // While we have not completed a row
+                        {
+                            for (int k = 0; k < rowSize && _X < this.width; k+=4) // Itterate over the bytes in a row
+                            {
+                                pixelData[this.height - 1 - _Y, _X] = new PixelColour(b[j + k + 2], b[j + k + 1], b[j + k + 0], b[j + k + 3]); // Colours in BGR order
+                                _X++;
+                            }
+                        }
                         break;
                     default:
-                        throw new Exception("Unrecognised Bitmap Format - Invalid bit depth (must be 1, 2, 4, 8, 16, 24)");
+                        throw new Exception("Unrecognised Bitmap Format - Invalid bit depth (must be 1, 2, 4, 8, 24, 32) - attempted: " + this.bitsPerPixel);
                 }
 
                 j += rowSize;
