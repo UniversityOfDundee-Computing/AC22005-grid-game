@@ -12,7 +12,13 @@ namespace PegGui
     public class Peg
     {
         Coord coors { get; set; }
-        enum Peg_State { EMPTY, SET, AVAILABLE, WALL };
+        public enum Peg_State { EMPTY, SET, AVAILABLE, WALL };
         Peg_State state { get; set; }
+
+        public Peg(Coord coors, Peg_State state)
+        {
+            this.coors = coors;
+            this.state = state;
+        }
     }
 }
