@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PegGui.Properties
+namespace BattleShipGame.Properties
 {
 
 

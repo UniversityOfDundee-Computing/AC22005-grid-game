@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace PegGui
+namespace BattleShipGame
 {
     public static class FileIO
     {
-        public static Board ReadBoardFile(String name)
+        public static Board ReadBoardFile(String name) //Depricated - used in previous version of the game
         {
             byte[] bitmapData = File.ReadAllBytes("./maps/" + name + ".bmp");
 
@@ -33,7 +33,8 @@ namespace PegGui
             }
 
 
-            return new Board(p);
+            //return new Board(p); // Fix compile issue due to deprication
+            return new Board();
         }
 
         public static List<Tuple<string, int>> getHighscores(string name)

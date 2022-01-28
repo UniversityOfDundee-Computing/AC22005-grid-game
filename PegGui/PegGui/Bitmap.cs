@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PegGui
+namespace BattleShipGame
 {
     // Store Pixel colour data for use with the Bitmap class
     struct PixelColour : IEquatable<PixelColour>

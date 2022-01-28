@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PegGui
+namespace BattleShipGame
 {
 	public class Coord
 	{
