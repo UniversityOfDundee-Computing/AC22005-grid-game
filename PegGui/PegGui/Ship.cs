@@ -38,23 +38,26 @@ namespace BattleShipGame
 			this._X = x;
 			this._Y = y;
 			this.Hits = 0;
+			this.Length = GetShipDimensions(t);
 
+		}
+
+		public static int GetShipDimensions(SHIP_TYPE t)
+        {
 			switch (t)
-            {
+			{
 				case SHIP_TYPE.Carrier:
-					this.Length = 5;
-					break;
+					return 5;
 				case SHIP_TYPE.Battleship:
-					this.Length = 4;
-					break;
+					return 4;
 				case SHIP_TYPE.Destroyer:
 				case SHIP_TYPE.Submarine:
-					this.Length = 3;
-					break;
+					return 3;
 				case SHIP_TYPE.Patrol_Boat:
-					this.Length = 2;
-					break;
-            }
-        }
+					return 2;
+				default:
+					throw new Exception("Unkonw Ship type - '" + Enum.GetName(typeof(SHIP_TYPE), t) + "'");
+			}
+		}
 	}
 }

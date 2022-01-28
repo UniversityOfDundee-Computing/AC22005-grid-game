@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Bitmap.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="GridPosition.cs" />
     <Compile Include="Peg.cs" />
     <Compile Include="Coord.cs" />
     <Compile Include="FileIO.cs" />
