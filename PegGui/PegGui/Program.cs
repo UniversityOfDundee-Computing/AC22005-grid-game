@@ -14,7 +14,7 @@ namespace PegGui
         [STAThread]
         static void Main()
         {
-            Board b = FileIO.ReadBoardFile("cross"); // Testing code
+            //Board b = FileIO.ReadBoardFile("cross"); // Testing code
             FileIO.addScore(10, "Adam", "cross"); // Testing code
             FileIO.getHighscores("cross"); // Testing code
 
