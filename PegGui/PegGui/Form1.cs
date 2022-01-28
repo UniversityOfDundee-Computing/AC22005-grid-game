@@ -25,6 +25,7 @@ namespace PegGui
                     btn[x, y].BackColor = Color.Red;
                     btn[x, y].Click += new EventHandler(this.btnEvent_Click);
                     Controls.Add(btn[x, y]);
+
                 }
             }
             MapSetup(1);
