@@ -26,6 +26,12 @@ namespace BattleShipGame
 		{
 		}
 
+		public ACTION_STATE PlacePeg(int _X, int _Y, bool isPlayer)
+        {
+			return ACTION_STATE.ACTION_SUCCESS;
+        }
+
+
 		public ACTION_STATE PlaceShip(Ship.SHIP_TYPE ship, int _X, int _Y, Ship.DIRECTION dir, bool isPlayer)
         {
 			GridPosition[,] board_Tmp;
@@ -45,6 +51,7 @@ namespace BattleShipGame
 			int yOff = 0;
 			for (int i = 0; i < Ship.GetShipDimensions(ship); i++)
             {
+
 				if ((_X + xOff>=0 && _X+xOff < board_Player.GetLength(1)) && (_Y + yOff >= 0 && _Y + yOff < board_Player.GetLength(0))  && board_Tmp[_X+xOff,_Y+yOff].ShipIndex != -1)
                 {
 					if (isPlayer)
@@ -57,6 +64,15 @@ namespace BattleShipGame
 					}
 					return ACTION_STATE.ACTION_FAIL;
                 }
+
+				if (isPlayer)
+				{
+					board_Tmp[_X + xOff, _Y + yOff].ShipIndex = playerShips.Count - 1;
+				}
+				else
+				{
+					board_Tmp[_X + xOff, _Y + yOff].ShipIndex = otherShips.Count - 1;
+				}
 
 				switch (dir)
                 {
