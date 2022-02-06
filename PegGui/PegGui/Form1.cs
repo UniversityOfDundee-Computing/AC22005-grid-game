@@ -27,21 +27,11 @@ namespace PegGui
             {
                for (int y = 0; y < 9; y++)
                 {
-
-                    Playerbtn[x, y] = new Button();
-                    Playerbtn[x, y].SetBounds(120 + (40 * x), 60 + (40 * y), 40, 40);
-                    Playerbtn[x, y].BackColor = Color.Red;
-                    Playerbtn[x, y].Click += new EventHandler(this.btnEvent_Click);
-                    Controls.Add(Playerbtn[x, y]);
-
-
-                    AIbtn[x, y] = new Button();
-                    AIbtn[x, y].SetBounds(120 + (40 * x), 60 + (40 * y), 43, 43);
-
-                    AIbtn[x, y].Click += new EventHandler(this.btnEvent_Click);
-                    AIbtn[x, y].BackColor = Color.Olive;
-                    Controls.Add(AIbtn[x, y]);
-
+                    btn[x, y] = new Button();
+                    btn[x, y].SetBounds(120 + (40 * x), 60 + (40 * y), 40, 40);
+                    btn[x, y].BackColor = Color.Red;
+                    btn[x, y].Click += new EventHandler(this.btnEvent_Click);
+                    Controls.Add(btn[x, y]);
                 }
             }
 
