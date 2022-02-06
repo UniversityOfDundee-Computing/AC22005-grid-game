@@ -16,7 +16,10 @@ namespace BattleShipGame
 
 		public enum ACTION_STATE {
 			ACTION_SUCCESS,
-			ACTION_FAIL
+			ACTION_FAIL,
+			ACTION_HIT,
+			ACTION_MISS,
+			ACTION_SHIP_SUNK
 		};
 
 		
@@ -28,7 +31,7 @@ namespace BattleShipGame
 
 		public ACTION_STATE PlacePeg(int _X, int _Y, bool isPlayer)
         {
-			return ACTION_STATE.ACTION_SUCCESS;
+			return ACTION_STATE.ACTION_HIT;
         }
 
 
