@@ -31,7 +31,22 @@ namespace BattleShipGame
 
 		public ACTION_STATE PlacePeg(int _X, int _Y, bool isPlayer)
         {
-			return ACTION_STATE.ACTION_HIT;
+			if (isPlayer)
+            {
+				if (board_Player[_X, _Y].hit)
+					return ACTION_STATE.ACTION_FAIL;
+
+				if (board_Player[_X,_Y].ShipIndex != -1)
+                {
+					board_Player[_X, _Y].hit = true;
+					playerShips[board_Player[_X, _Y].ShipIndex].Hits++;
+					if (playerShips[board_Player[_X, _Y].ShipIndex].Hits >= playerShips[board_Player[_X, _Y].ShipIndex].Length)
+						return ACTION_STATE.ACTION_SHIP_SUNK;
+
+					return ACTION_STATE.ACTION_HIT;
+				}
+            }
+			return ACTION_STATE.ACTION_MISS;
         }
 
 

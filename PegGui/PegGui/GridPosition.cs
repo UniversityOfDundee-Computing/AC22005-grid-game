@@ -10,5 +10,11 @@ namespace BattleShipGame
     {
         public int ShipIndex { get; set; }
         public bool hit { get; set; }
+
+        public GridPosition()
+        {
+            hit = false;
+            ShipIndex = -1;
+        }
     }
 }
