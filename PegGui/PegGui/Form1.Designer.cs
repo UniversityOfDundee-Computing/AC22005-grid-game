@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.BtnRestart = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.LblPegs = new System.Windows.Forms.Label();
+            this.BtnChangeDifficutly = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnExit = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +43,7 @@
             this.BtnRestart.BackColor = System.Drawing.Color.DimGray;
             this.BtnRestart.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRestart.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnRestart.Location = new System.Drawing.Point(406, 446);
+            this.BtnRestart.Location = new System.Drawing.Point(405, 481);
             this.BtnRestart.Name = "BtnRestart";
             this.BtnRestart.Size = new System.Drawing.Size(180, 39);
             this.BtnRestart.TabIndex = 135;
@@ -51,27 +51,18 @@
             this.BtnRestart.UseVisualStyleBackColor = false;
             this.BtnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
-            // button1
+            // BtnChangeDifficutly
             // 
-            this.button1.BackColor = System.Drawing.Color.DimGray;
-            this.button1.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(20, 446);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 39);
-            this.button1.TabIndex = 136;
-            this.button1.Text = "Change Map";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // LblPegs
-            // 
-            this.LblPegs.AutoSize = true;
-            this.LblPegs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPegs.Location = new System.Drawing.Point(119, 37);
-            this.LblPegs.Name = "LblPegs";
-            this.LblPegs.Size = new System.Drawing.Size(102, 20);
-            this.LblPegs.TabIndex = 137;
-            this.LblPegs.Text = "No. Of Pegs: ";
+            this.BtnChangeDifficutly.BackColor = System.Drawing.Color.DimGray;
+            this.BtnChangeDifficutly.Font = new System.Drawing.Font("Microsoft Tai Le", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnChangeDifficutly.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnChangeDifficutly.Location = new System.Drawing.Point(39, 483);
+            this.BtnChangeDifficutly.Name = "BtnChangeDifficutly";
+            this.BtnChangeDifficutly.Size = new System.Drawing.Size(180, 39);
+            this.BtnChangeDifficutly.TabIndex = 136;
+            this.BtnChangeDifficutly.Text = "Change Difficutly";
+            this.BtnChangeDifficutly.UseVisualStyleBackColor = false;
+            this.BtnChangeDifficutly.Click += new System.EventHandler(this.button1_Click);
             // 
             // menuStrip1
             // 
@@ -80,7 +71,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(607, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1018, 24);
             this.menuStrip1.TabIndex = 138;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,14 +96,27 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // BtnExit
+            // 
+            this.BtnExit.BackColor = System.Drawing.Color.DimGray;
+            this.BtnExit.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnExit.Location = new System.Drawing.Point(814, 481);
+            this.BtnExit.Name = "BtnExit";
+            this.BtnExit.Size = new System.Drawing.Size(180, 39);
+            this.BtnExit.TabIndex = 140;
+            this.BtnExit.Text = "Exit";
+            this.BtnExit.UseVisualStyleBackColor = false;
+            this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
+            // 
             // PegSolitairGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(607, 506);
-            this.Controls.Add(this.LblPegs);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1018, 553);
+            this.Controls.Add(this.BtnExit);
+            this.Controls.Add(this.BtnChangeDifficutly);
             this.Controls.Add(this.BtnRestart);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -127,12 +131,12 @@
 
         #endregion
         private System.Windows.Forms.Button BtnRestart;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label LblPegs;
+        private System.Windows.Forms.Button BtnChangeDifficutly;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button BtnExit;
     }
 }
 
