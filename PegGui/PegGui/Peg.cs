@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PegGui
+namespace BattleShipGame
 {
     /**
      * Class that represents a single peg, this stores the state of a peg as well as it's coordinates.
+     * 
+     * **DEPRICATED**
      */
     public class Peg
     {
