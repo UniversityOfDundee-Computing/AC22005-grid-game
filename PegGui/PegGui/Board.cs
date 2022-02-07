@@ -4,12 +4,10 @@ using System.Collections.Generic;
 namespace BattleShipGame
 {
 	public class Board
-	{
-		List<Tuple<Coord, Coord>> history = new List<Tuple<Coord, Coord>> { };
-
+	{ 
 		// 10x10 Board object
-		public GridPosition[,] board_Player = new GridPosition[10, 10];
-		public GridPosition[,] board_Other = new GridPosition[10, 10];
+		public GridPosition[,] board_Player;
+		public GridPosition[,] board_Other;
 
 		public List<Ship> playerShips = new List<Ship>();
 		public List<Ship> otherShips = new List<Ship>();
@@ -27,6 +25,17 @@ namespace BattleShipGame
 
 		public Board()
 		{
+			board_Player = new GridPosition[10, 10];
+			board_Other = new GridPosition[10, 10];
+
+			for (int _X = 0; _X < board_Player.GetLength(0); _X++)
+            {
+				for (int _Y = 0; _Y < board_Player.GetLength(1); _Y++)
+				{
+					board_Player[_X, _Y] = new GridPosition();
+					board_Other[_X, _Y] = new GridPosition();
+				}
+			}
 		}
 
 		public ACTION_STATE PlacePeg(int _X, int _Y, bool isPlayer)
