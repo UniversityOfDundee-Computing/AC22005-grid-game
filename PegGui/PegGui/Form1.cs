@@ -22,6 +22,8 @@ namespace BattleShipGame
         bool recentShip = false;
         int grayX;
         int grayY;
+        int NoOfShips = 0;
+
         public PegSolitairGUI(Board b)
         {
             board = b;
@@ -104,12 +106,11 @@ namespace BattleShipGame
 
 
 
-        private void FindValid()
+        private void FindValid(int x, int y)
         {
-           int x = grayX;
-           int y = grayY;
+           
            int loop = 0;
-           int NoOfShips = 0; 
+           
            bool xPluss = false;
            bool yPluss = false;
            bool xMinus = false;
@@ -119,17 +120,7 @@ namespace BattleShipGame
             {   
                 
                 
-                // this bit doesnt work
-                if (ship[loop] == 0)
-                {
-
-                    NoOfShips++;
-                    if (NoOfShips == 5)
-                    {
-                        placed = true;
-                        DisplayAi();
-                    }
-                }
+             
              
 
 
@@ -179,6 +170,7 @@ namespace BattleShipGame
                         loop = false;
                         recentShip = true;
                         board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.LEFT, true);
+                        NoOfShips++;
                     }
                     else
                     {
@@ -200,6 +192,7 @@ namespace BattleShipGame
                         loop = false;
                         recentShip = true;
                         board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.DOWN, true);
+                        NoOfShips++;
                     }
                     else
                     {
@@ -218,6 +211,7 @@ namespace BattleShipGame
                         loop = false;
                         recentShip = true;
                         board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.RIGHT, true);
+                        NoOfShips++;
                     }
                     else
                     {
@@ -236,6 +230,7 @@ namespace BattleShipGame
                         loop = false;
                         recentShip = true;
                         board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.UP, true);
+                        NoOfShips++;
                     }
                     else
                     {
@@ -246,32 +241,7 @@ namespace BattleShipGame
                 }
             }
 
-            switch (counter)
-            {
-                
-                case 2:
-                    ship[0] = 0;
-
-                    break;
-                case 3:
-                    
-                    if (ship[1] == 0)
-                    {
-                        ship[2] = 0;
-                    }
-                    ship[1] = 0;
-                    break;
-                case 4:
-                    ship[3] = 0;
-                    break;
-                case 5:
-                    ship[4] = 0;
-                    
-                    break;
-                
-             
-                
-            }
+           
 
             for (x = 0; x < 10; x++)
             {
@@ -285,6 +255,15 @@ namespace BattleShipGame
                     }
 
                 }
+            }
+            
+            
+            if (NoOfShips == 5)
+            {
+                placed = true;
+                DisplayAi();
+
+
             }
 
 
@@ -345,7 +324,7 @@ namespace BattleShipGame
                             {
                                 grayX = x;
                                 grayY = y;
-                                FindValid();
+                                FindValid(x, y);
                                
 
                             }
