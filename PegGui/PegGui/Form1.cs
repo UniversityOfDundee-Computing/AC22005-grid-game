@@ -12,8 +12,8 @@ namespace PegGui
 {
     public partial class PegSolitairGUI : Form
     {
-        Button[,] AIbtn = new Button[9, 9];
-        Button[,] Playerbtn = new Button[9, 9];
+        Button[,] AIbtn = new Button[10, 10];
+        Button[,] Playerbtn = new Button[10, 10];
 
         int[] ship = new int[] { 1, 2, 2, 3, 4 };
         bool placed = false;
@@ -23,21 +23,21 @@ namespace PegGui
         public PegSolitairGUI()
         {
             InitializeComponent();
-            for (int x =0; x < 9; x++)
+            for (int x =0; x < 10; x++)
             {
-               for (int y = 0; y < 9; y++)
+               for (int y = 0; y < 10; y++)
                 {
-                    btn[x, y] = new Button();
-                    btn[x, y].SetBounds(120 + (40 * x), 60 + (40 * y), 40, 40);
-                    btn[x, y].BackColor = Color.Red;
-                    btn[x, y].Click += new EventHandler(this.btnEvent_Click);
-                    Controls.Add(btn[x, y]);
+                    AIbtn[x, y] = new Button();
+                    AIbtn[x, y].SetBounds(120 + (40 * x), 60 + (40 * y), 43, 43);
+                    AIbtn[x, y].BackColor = Color.Red;
+                    AIbtn[x, y].Click += new EventHandler(this.btnEvent_Click);
+                    Controls.Add(AIbtn[x, y]);
                 }
             }
 
-            for (int x = 0; x < 9; x++)
+            for (int x = 0; x < 10; x++)
             {
-                for (int y = 0; y < 9; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     Playerbtn[x, y] = new Button();
                     Playerbtn[x, y].SetBounds(520 + (40 * x), 60 + (40 * y), 43, 43);
@@ -52,9 +52,9 @@ namespace PegGui
 
         public void MapSetup()
         {
-            for (int x = 0; x < 9; x++)
+            for (int x = 0; x < 10; x++)
             {
-                for (int y = 0; y < 9; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     AIbtn[x, y].Visible = false;
 
@@ -89,15 +89,17 @@ namespace PegGui
 
         private void DisplayAi()
         {
-            for (int x = 0; x < 9; x++)
+            for (int x = 0; x < 10; x++)
             {
-                for (int y = 0; y < 9; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     AIbtn[x, y].Visible = true;
 
                 }
             }
         }
+
+
 
         private void FindValid()
         {
@@ -117,6 +119,7 @@ namespace PegGui
                 // this bit doesnt work
                 if (ship[loop] == 0)
                 {
+
                     NoOfShips++;
                     if (NoOfShips == 5)
                     {
@@ -145,9 +148,19 @@ namespace PegGui
                     Playerbtn[x, y - ship[loop]].BackColor = Color.LightGray;
                        
                 }
-                    
-                
+
+                if (ship[loop] == 0)
+                {
+
+                    NoOfShips++;
+                    if (NoOfShips == 5)
+                    {
+                        placed = true;
+                        DisplayAi();
+                    }
+                }
                 loop++;
+                
             }
       
         }
@@ -259,9 +272,9 @@ namespace PegGui
                 
             }
 
-            for (x = 0; x < 9; x++)
+            for (x = 0; x < 10; x++)
             {
-                for (y = 0; y < 9; y++)
+                for (y = 0; y < 10; y++)
                 {
                     if (Playerbtn[x, y].BackColor == Color.LightGray)
                     {
@@ -284,9 +297,9 @@ namespace PegGui
             {
                 if( ((Button)sender).BackColor == Color.LightGray )
                 {
-                    for (int x = 0; x < 9; x++)
+                    for (int x = 0; x < 10; x++)
                     {
-                        for (int y = 0; y < 9; y++)
+                        for (int y = 0; y < 10; y++)
                         {
                             if (sender == Playerbtn[x, y])
                             {
@@ -302,9 +315,9 @@ namespace PegGui
                     if (recentShip == false)
                     {
 
-                        for (int x = 0; x < 9; x++)
+                        for (int x = 0; x < 10; x++)
                         {
-                            for (int y = 0; y < 9; y++)
+                            for (int y = 0; y < 10; y++)
                             {
                                 if (Playerbtn[x, y].BackColor == Color.LightGray)
                                 {
@@ -323,9 +336,9 @@ namespace PegGui
                     }
                     ((Button)sender).BackColor = Color.Gray;
                     
-                    for (int x = 0; x < 9; x++)
+                    for (int x = 0; x < 10; x++)
                     {
-                        for (int y = 0; y < 9; y++)
+                        for (int y = 0; y < 10; y++)
                         {
                             if (sender == Playerbtn[x, y])
                             {
@@ -350,9 +363,9 @@ namespace PegGui
 
         private void BtnRestart_Click(object sender, EventArgs e)
         {
-            for (int x = 0; x < 9; x++)
+            for (int x = 0; x < 10; x++)
             {
-                for (int y = 0; y < 9; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     
 

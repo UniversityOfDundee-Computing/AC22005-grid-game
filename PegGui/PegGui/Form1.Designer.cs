@@ -43,7 +43,7 @@
             this.BtnRestart.BackColor = System.Drawing.Color.DimGray;
             this.BtnRestart.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRestart.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnRestart.Location = new System.Drawing.Point(409, 446);
+            this.BtnRestart.Location = new System.Drawing.Point(405, 481);
             this.BtnRestart.Name = "BtnRestart";
             this.BtnRestart.Size = new System.Drawing.Size(180, 39);
             this.BtnRestart.TabIndex = 135;
@@ -56,7 +56,7 @@
             this.BtnChangeDifficutly.BackColor = System.Drawing.Color.DimGray;
             this.BtnChangeDifficutly.Font = new System.Drawing.Font("Microsoft Tai Le", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnChangeDifficutly.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnChangeDifficutly.Location = new System.Drawing.Point(20, 446);
+            this.BtnChangeDifficutly.Location = new System.Drawing.Point(39, 483);
             this.BtnChangeDifficutly.Name = "BtnChangeDifficutly";
             this.BtnChangeDifficutly.Size = new System.Drawing.Size(180, 39);
             this.BtnChangeDifficutly.TabIndex = 136;
@@ -101,7 +101,7 @@
             this.BtnExit.BackColor = System.Drawing.Color.DimGray;
             this.BtnExit.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnExit.Location = new System.Drawing.Point(818, 446);
+            this.BtnExit.Location = new System.Drawing.Point(814, 481);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Size = new System.Drawing.Size(180, 39);
             this.BtnExit.TabIndex = 140;
@@ -114,7 +114,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1018, 506);
+            this.ClientSize = new System.Drawing.Size(1018, 553);
             this.Controls.Add(this.BtnExit);
             this.Controls.Add(this.BtnChangeDifficutly);
             this.Controls.Add(this.BtnRestart);
