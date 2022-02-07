@@ -14,13 +14,16 @@ namespace BattleShipGame
         [STAThread]
         static void Main()
         {
+
             //Board b = FileIO.ReadBoardFile("cross"); // Testing code
             //FileIO.addScore(10, "Adam", "cross"); // Testing code
             //FileIO.getHighscores("cross"); // Testing code
+            Board board = new Board();
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PegSolitairGUI());
+            Application.Run(new PegSolitairGUI(board));
         }
     }
 }

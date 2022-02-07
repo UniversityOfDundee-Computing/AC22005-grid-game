@@ -133,28 +133,28 @@ namespace BattleShipGame
              
 
 
-                if (x + Ship.GetShipDimensions(ship[loop]) <= 9 && Playerbtn[x + Ship.GetShipDimensions(ship[loop]), y].BackColor != Color.Gray && xPluss == false)
+                if (x + Ship.GetShipDimensions(ship[loop])-1 <= 9 && Playerbtn[x + Ship.GetShipDimensions(ship[loop])-1, y].BackColor != Color.Gray && xPluss == false)
                 {
-                    Playerbtn[x + Ship.GetShipDimensions(ship[loop]), y].BackColor = Color.LightGray;
+                    Playerbtn[x + Ship.GetShipDimensions(ship[loop]) - 1, y].BackColor = Color.LightGray;
                        
                 }
                
-                if (y + Ship.GetShipDimensions(ship[loop]) <= 9 && Playerbtn[x, y + Ship.GetShipDimensions(ship[loop])].BackColor != Color.Gray && yPluss == false)
+                if (y + Ship.GetShipDimensions(ship[loop]) - 1 <= 9 && Playerbtn[x, y + Ship.GetShipDimensions(ship[loop]) - 1].BackColor != Color.Gray && yPluss == false)
                 {
-                    Playerbtn[x, y + Ship.GetShipDimensions(ship[loop])].BackColor = Color.LightGray;
+                    Playerbtn[x, y + Ship.GetShipDimensions(ship[loop]) - 1].BackColor = Color.LightGray;
                        
                 }
                 
-                if (x - Ship.GetShipDimensions(ship[loop]) >= 0 && Playerbtn[x - Ship.GetShipDimensions(ship[loop]), y].BackColor != Color.Gray && xMinus == false)
+                if (x - Ship.GetShipDimensions(ship[loop]) + 1 >= 0 && Playerbtn[x - Ship.GetShipDimensions(ship[loop]) + 1, y].BackColor != Color.Gray && xMinus == false)
                 {
-                    Playerbtn[x - Ship.GetShipDimensions(ship[loop]), y].BackColor = Color.LightGray;
+                    Playerbtn[x - Ship.GetShipDimensions(ship[loop]) + 1, y].BackColor = Color.LightGray;
                        
                 }
               
                 
-                if (y - Ship.GetShipDimensions(ship[loop]) >= 0 && Playerbtn[x, y - Ship.GetShipDimensions(ship[loop])].BackColor != Color.Gray && yMinus == false)
+                if (y - Ship.GetShipDimensions(ship[loop]) + 1 >= 0 && Playerbtn[x, y - Ship.GetShipDimensions(ship[loop]) + 1].BackColor != Color.Gray && yMinus == false)
                 {
-                    Playerbtn[x, y - Ship.GetShipDimensions(ship[loop])].BackColor = Color.LightGray;
+                    Playerbtn[x, y - Ship.GetShipDimensions(ship[loop]) + 1].BackColor = Color.LightGray;
                        
                 }
                 
@@ -168,7 +168,7 @@ namespace BattleShipGame
 
         void placeShip(int x, int y)
         {
-            int counter = 1;
+            int counter = 0;
             bool loop = true;
             if (x > grayX && y == grayY)
             {
