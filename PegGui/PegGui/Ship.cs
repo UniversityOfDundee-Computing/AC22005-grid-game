@@ -24,6 +24,16 @@ namespace BattleShipGame
 			RIGHT
 		};
 
+		public SHIP_TYPE[] DEFAULT_SHIPS = new SHIP_TYPE[] {
+			SHIP_TYPE.Carrier,
+			SHIP_TYPE.Battleship,
+			SHIP_TYPE.Destroyer,
+			SHIP_TYPE.Patrol_Boat,
+			SHIP_TYPE.Patrol_Boat,
+			SHIP_TYPE.Submarine,
+			SHIP_TYPE.Submarine
+		};
+
 		public SHIP_TYPE Type { get; set; }
 		public DIRECTION Direction { get; set; }
 		public int _X { get; set; }

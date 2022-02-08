@@ -174,7 +174,7 @@ namespace BattleShipGame
                     {
                         loop = false;
                         recentShip = true;
-                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.LEFT, true);
+                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.RIGHT, true);
                         NoOfShips++;
                     }
                     else
@@ -215,7 +215,7 @@ namespace BattleShipGame
                     {
                         loop = false;
                         recentShip = true;
-                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.RIGHT, true);
+                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.LEFT, true);
                         NoOfShips++;
                     }
                     else
