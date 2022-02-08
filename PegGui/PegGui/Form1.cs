@@ -14,10 +14,12 @@ namespace BattleShipGame
     {
         Board board;
 
+
+
         Button[,] AIbtn = new Button[10, 10];
         Button[,] Playerbtn = new Button[10, 10];
 
-        
+        int[] ship = new int[] { 1, 0, 2, 2};
         bool placed = false;
         bool recentShip = false;
         int grayX;
@@ -74,7 +76,7 @@ namespace BattleShipGame
                 }
             }
 
-            //make 5 images that disapear when ship has been placed
+            //make 7 images that disapear when ship has been placed
             Button BtnCarrier = new Button();
             Button BtnWarShip = new Button();
             Button BtnSub = new Button();
@@ -129,6 +131,26 @@ namespace BattleShipGame
                 loop = 0;
                 while (loop <4 && Valid == true)
                 {
+                    while (ship[loop] == 3)
+                    {
+                        switch (i)
+                        {
+                            case DIRECTION.UP:
+                                y--;
+                                break;
+                            case DIRECTION.DOWN:
+                                y++;
+                                break;
+                            case DIRECTION.LEFT:
+                                x--;
+                                break;
+                            case DIRECTION.RIGHT:
+                                x++;
+                                break;
+                        }
+                        loop++;
+                    }
+
                     switch (i)
                     {
                         case DIRECTION.UP:
@@ -161,7 +183,7 @@ namespace BattleShipGame
 
         void placeShip(int x, int y)
         {
-            
+            int counter = 0;
             DIRECTION i;
            
             if(x > grayX)
@@ -185,7 +207,10 @@ namespace BattleShipGame
 
             while(x > grayX || y > grayY || x < grayX || y < grayY)
             {
+
+                counter++;
                 Playerbtn[x, y].BackColor=Color.Gray;
+                
                 switch (i)
                 {
                     case DIRECTION.UP:
@@ -208,7 +233,22 @@ namespace BattleShipGame
             recentShip = true;
             NoOfShips++;
 
+            switch (counter)
+            {
+                case 1:
+                    ship[0]++;
+                    break;
+                case 2:
+                    ship[1]++;
+                    break;
+                case 3:
+                    ship[2]++;
+                    break;
+                case 4:
+                    ship[3]++;
+                    break;
 
+            }
 
 
             for (x = 0; x < 10; x++)
