@@ -24,6 +24,20 @@ namespace BattleShipGame
 			RIGHT
 		};
 
+		public SHIP_TYPE[] SHIPS =
+		{
+			SHIP_TYPE.Patrol_Boat,
+			SHIP_TYPE.Patrol_Boat,
+			SHIP_TYPE.Patrol_Boat,
+			SHIP_TYPE.Patrol_Boat,
+			SHIP_TYPE.Destroyer,
+			SHIP_TYPE.Destroyer,
+			SHIP_TYPE.Destroyer,
+			SHIP_TYPE.Battleship,
+			SHIP_TYPE.Battleship,
+			SHIP_TYPE.Carrier
+		};
+
 		public SHIP_TYPE Type { get; set; }
 		public DIRECTION Direction { get; set; }
 		public int _X { get; set; }
