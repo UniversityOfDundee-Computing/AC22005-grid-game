@@ -5,7 +5,7 @@ namespace BattleShipGame
 {
 	public class Board
 	{ 
-		// 10x10 Board object¦¦¦¦¦¦¦¦¦¦¦¦
+		// 10x10 Board object
 		public GridPosition[,] board_Player;
 		public GridPosition[,] board_Other;
 
