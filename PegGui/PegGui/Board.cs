@@ -20,7 +20,20 @@ namespace BattleShipGame
 			ACTION_SHIP_SUNK
 		};
 
-		
+		public Ship.SHIP_TYPE[] INITIAL_SHIPS =
+		{
+			Ship.SHIP_TYPE.Patrol_Boat,
+			Ship.SHIP_TYPE.Patrol_Boat,
+			Ship.SHIP_TYPE.Patrol_Boat,
+			Ship.SHIP_TYPE.Patrol_Boat,
+			Ship.SHIP_TYPE.Destroyer,
+			Ship.SHIP_TYPE.Destroyer,
+			Ship.SHIP_TYPE.Destroyer,
+			Ship.SHIP_TYPE.Battleship,
+			Ship.SHIP_TYPE.Battleship,
+			Ship.SHIP_TYPE.Carrier
+		};
+
 
 
 		public Board()
