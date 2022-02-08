@@ -71,7 +71,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1018, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(996, 24);
             this.menuStrip1.TabIndex = 138;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -101,7 +101,7 @@
             this.BtnExit.BackColor = System.Drawing.Color.DimGray;
             this.BtnExit.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnExit.Location = new System.Drawing.Point(814, 481);
+            this.BtnExit.Location = new System.Drawing.Point(776, 481);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Size = new System.Drawing.Size(180, 39);
             this.BtnExit.TabIndex = 140;
@@ -114,7 +114,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1018, 553);
+            this.ClientSize = new System.Drawing.Size(996, 553);
             this.Controls.Add(this.BtnExit);
             this.Controls.Add(this.BtnChangeDifficutly);
             this.Controls.Add(this.BtnRestart);
