@@ -283,55 +283,69 @@ namespace BattleShipGame
 
         void btnEvent_Click(Object sender, EventArgs e)
         {
-            
 
-            if(placed == false)
+
+            if (placed == false)
             {
-
-                for (int x = 0; x < 10; x++)
-                {
-                    for (int y = 0; y < 10; y++)
-                    {
-                        if (sender == Playerbtn[x, y])
-                        {
-                            if (((Button)sender).BackColor == Color.LightGray)
-                            {
-                                placeShip(x, y);
-
-
-                            }
-                            else if (((Button)sender).BackColor == Color.LightBlue)
-                            {
-                                
-                                Playerbtn[x,y].BackColor = Color.Gray;
-                                
-                                grayX = x;
-                                grayY = y;
-                                FindValid(x, y);
-                                recentShip = true;
-
-                            }
-                        }
-                        
-
-                    }
-                }
-               
-
-                if (recentShip == false)
+                if (((Button)sender).BackColor == Color.LightGray)
                 {
                     for (int x = 0; x < 10; x++)
                     {
                         for (int y = 0; y < 10; y++)
                         {
-                            Playerbtn[x, y].BackColor = Color.LightBlue;
-                            Playerbtn[grayX, grayY].BackColor = Color.LightBlue;
+                            if (sender == Playerbtn[x, y])
+                            {
+                                placeShip(x, y);
+
+
+                            }
+
                         }
                     }
-                    recentShip = false;
                 }
+                else
+                {
+                    if (recentShip == false)
+                    {
+
+                        for (int x = 0; x < 10; x++)
+                        {
+                            for (int y = 0; y < 10; y++)
+                            {
+                                if (Playerbtn[x, y].BackColor == Color.LightGray)
+                                {
+
+                                    Playerbtn[x, y].BackColor = Color.LightBlue;
+
+                                }
+
+                            }
+                        }
+                        Playerbtn[grayX, grayY].BackColor = Color.LightBlue;
+                    }
+                    else
+                    {
+                        recentShip = false;
+                    }
+                    ((Button)sender).BackColor = Color.Gray;
+
+                    for (int x = 0; x < 10; x++)
+                    {
+                        for (int y = 0; y < 10; y++)
+                        {
+                            if (sender == Playerbtn[x, y])
+                            {
+                                grayX = x;
+                                grayY = y;
+                                FindValid(x, y);
 
 
+                            }
+
+                        }
+                    }
+
+                }
             }
         }
 
