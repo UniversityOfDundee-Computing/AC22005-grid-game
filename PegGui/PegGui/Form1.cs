@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static BattleShipGame.Ship;
 
 namespace BattleShipGame
 {
@@ -19,7 +20,7 @@ namespace BattleShipGame
         Button[,] AIbtn = new Button[10, 10];
         Button[,] Playerbtn = new Button[10, 10];
 
-        int[] ship = new int[] { 1, 0, 2, 2};
+        int[] Ships_to_place = new int[] { 1, 0, 2, 2};
         bool placed = false;
         bool recentShip = false;
         int grayX;
@@ -116,72 +117,80 @@ namespace BattleShipGame
             }
         }
 
+        private List<SHIP_TYPE> GetAvailableShips()
+        {
+            List<SHIP_TYPE> def_Ships = new List<SHIP_TYPE>(Ship.DEFAULT_SHIPS);
+            foreach (Ship s in board.playerShips)
+            {
 
+                for (int i = 0; i < def_Ships.Count; i++)
+                {
+                    SHIP_TYPE st = def_Ships[i];
+                    if (st == s.Type)
+                    {
+                        def_Ships.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+            return def_Ships;
+        }
+        private int[] GetAvailableLengths()
+        {
+            List<SHIP_TYPE> avail_Ships = GetAvailableShips();
+            List<int> lengths = new List<int>();
+            foreach (SHIP_TYPE st in avail_Ships)
+            {
+                int l = Ship.GetShipDimensions(st);
+                if (!lengths.Contains(l))
+                    lengths.Add(l);
+            }
+            lengths.Sort();
+            return lengths.ToArray();
+        }
 
         private void FindValid(int x, int y)
         {
-            bool Valid = true;
-            int loop = 0;
 
-            foreach (DIRECTION i in Enum.GetValues(typeof(DIRECTION))){
-                
-                x = grayX;
-                y = grayY;
-                Valid = true;
-                loop = 0;
-                while (loop <4 && Valid == true)
+            int[] ShipsToBePlaced = GetAvailableLengths();
+            int itterator;
+            int xOff;
+            int yOff;
+            foreach (DIRECTION dir in Enum.GetValues(typeof(DIRECTION)))
+            {
+                xOff = 0;
+                yOff = 0;
+                itterator = 0;
+                while (
+                    itterator < ShipsToBePlaced[ShipsToBePlaced.Length-1] &&
+                    x+xOff >= 0 && x+xOff < board.board_Player.GetLength(0) &&
+                    y+yOff >= 0 && y+yOff < board.board_Player.GetLength(1)
+                    )
                 {
-                    while (loop <4 && ship[loop] == 3)
+                    if (board.board_Player[x + xOff, y + yOff].ShipIndex != -1)
+                        break;
+
+                    Playerbtn[x + xOff, y + yOff].BackColor = Color.LightGray;
+
+                    itterator++;
+
+                    switch (dir)
                     {
-                        if (loop != 3 || ship[3] != 3)
-                            switch (i)
-                            {
-                                case DIRECTION.UP:
-                                    y--;
-                                    break;
-                                case DIRECTION.DOWN:
-                                    y++;
-                                    break;
-                                case DIRECTION.LEFT:
-                                    x--;
-                                    break;
-                                case DIRECTION.RIGHT:
-                                    x++;
-                                    break;
-                            }
-                        
-                        loop++;
-                       
+                        case DIRECTION.UP:
+                            yOff--;
+                            break;
+                        case DIRECTION.DOWN:
+                            yOff++;
+                            break;
+                        case DIRECTION.LEFT:
+                            xOff--;
+                            break;
+                        case DIRECTION.RIGHT:
+                            xOff++;
+                            break;
                     }
-                    if (loop < 4)  
-                        switch (i)
-                        {
-                            case DIRECTION.UP:
-                                y--;
-                                break;
-                            case DIRECTION.DOWN:
-                                y++;
-                                break;
-                            case DIRECTION.LEFT:
-                                x--;
-                                break;
-                            case DIRECTION.RIGHT:
-                                x++;
-                                break;
-                        }   
-                    
-                    if (x <0 || x  >9 || y<0 || y>9 || Playerbtn[x, y].BackColor == Color.Gray)
-                    {
-                        Valid = false;
-                    }
-                    else
-                    {
-                        Playerbtn[x, y].BackColor = Color.LightGray;
-                    }
-                    loop++;
                 }
-                
-           }
+            }
         }
         
 
@@ -240,16 +249,16 @@ namespace BattleShipGame
             switch (counter)
             {
                 case 1:
-                    ship[0]++;
+                    Ships_to_place[0]++;
                     break;
                 case 2:
-                    ship[1]++;
+                    Ships_to_place[1]++;
                     break;
                 case 3:
-                    ship[2]++;
+                    Ships_to_place[2]++;
                     break;
                 case 4:
-                    ship[3]++;
+                    Ships_to_place[3]++;
                     break;
 
             }
