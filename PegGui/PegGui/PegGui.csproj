@@ -103,6 +103,11 @@
     <Content Include="Resources\expl_small.wav" />
     <Content Include="Resources\miss.wav" />
     <Content Include="Resources\drop.wav" />
+    <None Include="Resources\Vessles\Carrier.png" />
+    <None Include="Resources\Vessles\Battleship.png" />
+    <None Include="Resources\Vessles\Submarine.png" />
+    <None Include="Resources\Vessles\Patrol_Boat.png" />
+    <None Include="Resources\Vessles\Destroyer.png" />
     <None Include="Resources\music.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

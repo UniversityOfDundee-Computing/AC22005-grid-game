@@ -83,11 +83,21 @@ namespace BattleShipGame
             BtnShip.SetBounds(270, 200, 43, 129);
             BtnFisher.SetBounds(320, 200, 43, 86);
 
-            BtnCarrier.BackColor = Color.Gray;
-            BtnWarShip.BackColor = Color.Gray;
-            BtnSub.BackColor = Color.Gray;
-            BtnShip.BackColor = Color.Gray;
-            BtnFisher.BackColor = Color.Gray;
+            BtnCarrier.BackColor = Color.Transparent;
+            BtnCarrier.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnCarrier.BackgroundImage = PegGui.Properties.Resources.Carrier;
+            BtnWarShip.BackColor = Color.Transparent;
+            BtnWarShip.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnWarShip.BackgroundImage = PegGui.Properties.Resources.Battleship;
+            BtnSub.BackColor = Color.Transparent;
+            BtnSub.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnSub.BackgroundImage = PegGui.Properties.Resources.Submarine;
+            BtnShip.BackColor = Color.Transparent;
+            BtnShip.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnShip.BackgroundImage = PegGui.Properties.Resources.Destroyer;
+            BtnFisher.BackColor = Color.Transparent;
+            BtnFisher.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnFisher.BackgroundImage = PegGui.Properties.Resources.Patrol_Boat;
 
 
 
