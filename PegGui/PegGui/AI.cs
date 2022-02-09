@@ -38,8 +38,8 @@ namespace BattleShipGame
 				// get random coords, try to place, if not fits, try again
 				while (!placed)
                 {
-					int randX = random.Next(0, board.SIZE);
-					int randY = random.Next(0, board.SIZE);
+					int randX = random.Next(0, Board.SIZE);
+					int randY = random.Next(0, Board.SIZE);
 					Board.ACTION_STATE res = board.PlaceShip(ship_type, randX, randY, randDir, IS_PLAYER);
 					if (res == Board.ACTION_STATE.ACTION_SUCCESS)
                     {
@@ -68,7 +68,7 @@ namespace BattleShipGame
 						if (board.board_Player[i,j].ShipIndex != -1)
                         {
 							// try to hit
-							if (board.PlacePeg(i,j, IS_PLAYER) != board.ACTION_STATE.ACTION_FAIL)
+							if (board.PlacePeg(i,j, IS_PLAYER) != Board.ACTION_STATE.ACTION_FAIL)
                             {
 								return true;
                             }
@@ -80,15 +80,18 @@ namespace BattleShipGame
 				bool pegPlaced = false;
 				while (!pegPlaced)
                 {
-					int randX = random.Next(0, board.SIZE);
-					int randY = random.Next(0, board.SIZE);
-					if (board.PlacePeg(randX, randY) != board.ACTION_STATE.ACTION_FAIL)
+					int randX = random.Next(0, Board.SIZE);
+					int randY = random.Next(0, Board.SIZE);
+					if (board.PlacePeg(randX, randY, IS_PLAYER) != Board.ACTION_STATE.ACTION_FAIL)
                     {
 						pegPlaced = true;
                     }
                 }
 				return true;
             } else if (difficuilty == DIFFICUILTY.MEDIUM) // random hits with trailing
+			{
+
+            }
 			return false;
 
         }
