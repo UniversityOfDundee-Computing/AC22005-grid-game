@@ -132,9 +132,9 @@ namespace BattleShipGame
 
 				// Bounds checking and collision checking for a placed ship
 				if (
-					(_X + xOff >= 0 && _X + xOff < board_Player.GetLength(0)) || 
-					(_Y + yOff >= 0 && _Y + yOff < board_Player.GetLength(1)) || 
-					(board_Tmp[_X+xOff,_Y+yOff].ShipIndex != -1)
+					!(_X + xOff >= 0 && _X + xOff < board_Player.GetLength(0)) || 
+					!(_Y + yOff >= 0 && _Y + yOff < board_Player.GetLength(1)) || 
+					!(board_Tmp[_X+xOff,_Y+yOff].ShipIndex == -1)
 					)
                 {
 					// Remove the ship from the list and fail if collision with edge or other ship

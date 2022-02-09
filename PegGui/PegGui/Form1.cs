@@ -24,8 +24,8 @@ namespace BattleShipGame
         int[] Ships_to_place = new int[] { 1, 0, 2, 2};
         bool placed = false;
         bool recentShip = false;
-        int grayX;
-        int grayY;
+        int OriginX;
+        int OriginY;
         int NoOfShips = 0;
 
         SoundPlayer Music;
@@ -115,72 +115,93 @@ namespace BattleShipGame
             }
         }
 
-     
-        
-        private void FindValid(int x, int y)
+        private List<SHIP_TYPE> GetAvailableShips()
         {
-            bool Valid = true;
-            int loop = 0;
-
-            foreach (DIRECTION i in Enum.GetValues(typeof(DIRECTION)))
+            List<SHIP_TYPE> def_Ships = new List<SHIP_TYPE>(Ship.DEFAULT_SHIPS);
+            foreach (Ship s in board.playerShips)
             {
 
-                x = grayX;
-                y = grayY;
-                Valid = true;
-                loop = 0;
-                while (loop < 4 && Valid == true)
+                for (int i = 0; i < def_Ships.Count; i++)
                 {
-                    while (loop < 4 && Ships_to_place[loop] == 3)
+                    SHIP_TYPE st = def_Ships[i];
+                    if (st == s.Type)
                     {
-                        if (loop != 3 || Ships_to_place[3] != 3)
-                            switch (i)
-                            {
-                                case DIRECTION.UP:
-                                    y--;
-                                    break;
-                                case DIRECTION.DOWN:
-                                    y++;
-                                    break;
-                                case DIRECTION.LEFT:
-                                    x--;
-                                    break;
-                                case DIRECTION.RIGHT:
-                                    x++;
-                                    break;
-                            }
-
-                        loop++;
-
+                        def_Ships.RemoveAt(i);
+                        break;
                     }
-                    if (loop < 4)
-                        switch (i)
-                        {
-                            case DIRECTION.UP:
-                                y--;
-                                break;
-                            case DIRECTION.DOWN:
-                                y++;
-                                break;
-                            case DIRECTION.LEFT:
-                                x--;
-                                break;
-                            case DIRECTION.RIGHT:
-                                x++;
-                                break;
-                        }
-
-                    if (x < 0 || x > 9 || y < 0 || y > 9 || Playerbtn[x, y].BackColor == Color.Gray)
-                    {
-                        Valid = false;
-                    }
-                    else
-                    {
-                        Playerbtn[x, y].BackColor = Color.LightGray;
-                    }
-                    loop++;
                 }
+            }
 
+            // Commpatibility with existing code:
+            Ships_to_place = new int[Enum.GetValues(typeof(SHIP_TYPE)).Length]; // create new array
+            for (int i = 0; i < Ships_to_place.Length; i++) // Fill the array
+                Ships_to_place[i] = 3;
+
+            foreach (SHIP_TYPE st in def_Ships)
+            {
+                Ships_to_place[(int)st]--; // Remove the values to produce the inverted to be bplaced array.
+            }
+
+            return def_Ships;
+        }
+
+        private int[] GetAvailableLengths()
+        {
+            List<SHIP_TYPE> avail_Ships = GetAvailableShips();
+            List<int> lengths = new List<int>();
+            foreach (SHIP_TYPE st in avail_Ships)
+            {
+                int l = Ship.GetShipDimensions(st);
+                if (!lengths.Contains(l))
+                    lengths.Add(l);
+            }
+            lengths.Sort();
+            return lengths.ToArray();
+        }
+
+
+
+        private void FindValid(int x, int y)
+        {
+            int[] availableLengths = GetAvailableLengths();
+            foreach (DIRECTION direction in Enum.GetValues(typeof(DIRECTION)))
+            {
+                x = OriginX;
+                y = OriginY;
+                int RaytraceDistance = 0;
+
+                while (
+                    x >= 0 && x < board.board_Player.GetLength(0) && // X/Y bounds Check
+                    y >= 0 && y < board.board_Player.GetLength(1) &&
+                    RaytraceDistance < availableLengths[availableLengths.Length-1] // Check that the raytrace has not gone further than the longest possible ship
+                    )
+                {
+                    // Break this direction if a ship is hit
+                    if (board.board_Player[x, y].ShipIndex != -1)
+                        break;
+
+                    if (availableLengths.Contains(RaytraceDistance+1))
+                        Playerbtn[x, y].BackColor = Color.LightGray;
+
+                    RaytraceDistance++;
+
+                    switch (direction)
+                    {
+                        case DIRECTION.UP:
+                            y--;
+                            break;
+                        case DIRECTION.DOWN:
+                            y++;
+                            break;
+                        case DIRECTION.LEFT:
+                            x--;
+                            break;
+                        case DIRECTION.RIGHT:
+                            x++;
+                            break;
+                    }
+
+                }
             }
         }
 
@@ -190,15 +211,15 @@ namespace BattleShipGame
             int counter = 0;
             DIRECTION i;
            
-            if(x > grayX)
+            if(x > OriginX)
             {
                 i = DIRECTION.RIGHT;
             }
-            else if(y > grayY)
+            else if(y > OriginY)
             {
                 i = DIRECTION.DOWN;
             }
-            else if (x < grayX)
+            else if (x < OriginX)
             {
                 i = DIRECTION.LEFT;
             }
@@ -209,7 +230,7 @@ namespace BattleShipGame
 
 
 
-            while(x > grayX || y > grayY || x < grayX || y < grayY)
+            while(x > OriginX || y > OriginY || x < OriginX || y < OriginY)
             {
 
                 counter++;
@@ -243,23 +264,23 @@ namespace BattleShipGame
             {
                 case 1:
                     Ships_to_place[0]++;
-                    board.PlaceShip(SHIP_TYPE.Patrol_Boat, grayX, grayY, i, true);
+                    board.PlaceShip(SHIP_TYPE.Patrol_Boat, OriginX, OriginY, i, true);
                     break;
                 case 2:
                     Ships_to_place[1]++;
                     if (Ships_to_place[1] == 1)
                     {
-                       board.PlaceShip(SHIP_TYPE.Destroyer, grayX, grayY ,i , true);
+                       board.PlaceShip(SHIP_TYPE.Destroyer, OriginX, OriginY ,i , true);
                     }
-                    board.PlaceShip(SHIP_TYPE.Submarine, grayX, grayY, i, true);
+                    board.PlaceShip(SHIP_TYPE.Submarine, OriginX, OriginY, i, true);
                     break;
                 case 3:
                     Ships_to_place[2]++;
-                    board.PlaceShip(SHIP_TYPE.Battleship, grayX, grayY, i, true);
+                    board.PlaceShip(SHIP_TYPE.Battleship, OriginX, OriginY, i, true);
                     break;
                 case 4:
                     Ships_to_place[3]++;
-                    board.PlaceShip(SHIP_TYPE.Carrier, grayX, grayY, i, true);
+                    board.PlaceShip(SHIP_TYPE.Carrier, OriginX, OriginY, i, true);
                     break;
 
             }
@@ -331,7 +352,7 @@ namespace BattleShipGame
 
                             }
                         }
-                        Playerbtn[grayX, grayY].BackColor = Color.LightBlue;
+                        Playerbtn[OriginX, OriginY].BackColor = Color.LightBlue;
                     }
                     else
                     {
@@ -345,8 +366,8 @@ namespace BattleShipGame
                         {
                             if (sender == Playerbtn[x, y])
                             {
-                                grayX = x;
-                                grayY = y;
+                                OriginX = x;
+                                OriginY = y;
                                 FindValid(x, y);
 
 
