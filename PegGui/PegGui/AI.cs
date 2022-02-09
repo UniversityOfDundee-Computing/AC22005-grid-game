@@ -52,11 +52,25 @@ namespace BattleShipGame
 
 		}
 
-		public bool getMove()
+		public bool doMove()
         {
-			if (difficuilty == DIFFICUILTY.IMPOSSIBLE)
+			const bool IS_PLAYER = false;
+			if (difficuilty == DIFFICUILTY.IMPOSSIBLE) // joke difficuilty
             {
-
+				for (int i=0; i<board.SIZE; i++)
+                {
+					for (int j=0; j<board.SIZE; j++)
+                    {
+						if (board.board_player[i][j].ShipIndex != -1)
+                        {
+							if (!shots.Contains(new Coord(i,j)))
+                            {
+								board.PlacePeg(i,j, IS_PLAYER);
+								return true;
+                            }
+                        }
+                    }
+                }
             } else
             {
 				///
