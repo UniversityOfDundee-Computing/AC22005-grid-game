@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,12 +28,15 @@ namespace BattleShipGame
         int grayY;
         int NoOfShips = 0;
 
-        
+        SoundPlayer Music;
+        SoundPlayer Sfx;
 
         public PegSolitairGUI(Board b)
         {
             board = b;
             InitializeComponent();
+            Music = new SoundPlayer(PegGui.Properties.Resources.music);
+            Music.PlayLooping();
             for (int x =0; x < 10; x++)
             {
                for (int y = 0; y < 10; y++)
@@ -181,7 +185,7 @@ namespace BattleShipGame
         }
 
 
-        void placeShip(int x, int y)
+        void PlaceShip(int x, int y)
         {
             int counter = 0;
             DIRECTION i;
@@ -300,7 +304,7 @@ namespace BattleShipGame
                         {
                             if (sender == Playerbtn[x, y])
                             {
-                                placeShip(x, y);
+                                PlaceShip(x, y);
 
 
                             }
@@ -386,6 +390,12 @@ namespace BattleShipGame
         private void BtnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About a = new About();
+            a.Show();
         }
     }
 }

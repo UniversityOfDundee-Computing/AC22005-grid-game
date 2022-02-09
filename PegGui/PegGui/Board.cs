@@ -42,12 +42,12 @@ namespace BattleShipGame
         {
 			if (!isPlayer)
             {
-				if (board_Player[_X, _Y].hit)
+				if (board_Player[_X, _Y].Hit)
 					return ACTION_STATE.ACTION_FAIL;
 
 				if (board_Player[_X,_Y].ShipIndex != -1)
                 {
-					board_Player[_X, _Y].hit = true;
+					board_Player[_X, _Y].Hit = true;
 					playerShips[board_Player[_X, _Y].ShipIndex].Hits++;
 					if (playerShips[board_Player[_X, _Y].ShipIndex].Hits >= playerShips[board_Player[_X, _Y].ShipIndex].Length)
 						return ACTION_STATE.ACTION_SHIP_SUNK;
@@ -56,12 +56,12 @@ namespace BattleShipGame
 				}
             } else
             {
-				if (board_Other[_X, _Y].hit)
+				if (board_Other[_X, _Y].Hit)
 					return ACTION_STATE.ACTION_FAIL;
 
 				if (board_Other[_X, _Y].ShipIndex != -1)
 				{
-					board_Other[_X, _Y].hit = true;
+					board_Other[_X, _Y].Hit = true;
 					otherShips[board_Other[_X, _Y].ShipIndex].Hits++;
 					if (otherShips[board_Other[_X, _Y].ShipIndex].Hits >= otherShips[board_Other[_X, _Y].ShipIndex].Length)
 						return ACTION_STATE.ACTION_SHIP_SUNK;
