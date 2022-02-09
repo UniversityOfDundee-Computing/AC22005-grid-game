@@ -38,8 +38,8 @@ namespace BattleShipGame
 				// get random coords, try to place, if not fits, try again
 				while (!placed)
                 {
-					int randX = random.Next(0, 8);
-					int randY = random.Next(0, 8);
+					int randX = random.Next(0, 10);
+					int randY = random.Next(0, 10);
 					Board.ACTION_STATE res = board.PlaceShip(ship_type, randX, randY, randDir, IS_PLAYER);
 					if (res == Board.ACTION_STATE.ACTION_SUCCESS)
                     {
