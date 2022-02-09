@@ -192,19 +192,19 @@ namespace BattleShipGame
            
             if(x > grayX)
             {
-                i = DIRECTION.LEFT;
+                i = DIRECTION.RIGHT;
             }
             else if(y > grayY)
             {
-                i = DIRECTION.UP;
+                i = DIRECTION.DOWN;
             }
             else if (x < grayX)
             {
-                i = DIRECTION.RIGHT;
+                i = DIRECTION.LEFT;
             }
             else
             {
-                i = DIRECTION.DOWN;
+                i = DIRECTION.UP;
             }
 
 
@@ -217,21 +217,22 @@ namespace BattleShipGame
                 
                 switch (i)
                 {
-                    case DIRECTION.UP:
+                    case DIRECTION.DOWN:
                         y--;
                         break;
-                    case DIRECTION.DOWN:
+                    case DIRECTION.UP:
                         y++;
                         break;
-                    case DIRECTION.LEFT:
+                    case DIRECTION.RIGHT:
                         x--;
                         break;
-                    case DIRECTION.RIGHT:
+                    case DIRECTION.LEFT:
                         x++;
                         break;
                         
                 }
                 
+
             }
 
             recentShip = true;
