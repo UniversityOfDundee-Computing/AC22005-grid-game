@@ -99,5 +99,11 @@
   <ItemGroup>
     <None Include="Resources\icons8-battleship-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\expl_big.wav" />
+    <Content Include="Resources\expl_small.wav" />
+    <Content Include="Resources\miss.wav" />
+    <None Include="Resources\music.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

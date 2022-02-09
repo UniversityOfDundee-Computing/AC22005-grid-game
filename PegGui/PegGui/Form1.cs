@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,6 +28,9 @@ namespace BattleShipGame
         int grayY;
         int NoOfShips = 0;
 
+        SoundPlayer Music;
+        SoundPlayer Sfx;
+
         public enum DIRECTION
         {
             UP,
@@ -39,6 +43,8 @@ namespace BattleShipGame
         {
             board = b;
             InitializeComponent();
+            Music = new SoundPlayer(PegGui.Properties.Resources.music);
+            Music.PlayLooping();
             for (int x =0; x < 10; x++)
             {
                for (int y = 0; y < 10; y++)

@@ -29,6 +29,7 @@ namespace BattleShipGame
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,8 +62,7 @@ namespace BattleShipGame
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(520, 48);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Small implementation of the Battleships grid game with ai and player vs player ca" +
-    "pabilities. Battleship icon by Icons8";
+            this.label2.Text = resources.GetString("label2.Text");
             // 
             // About
             // 
