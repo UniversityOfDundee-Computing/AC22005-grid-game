@@ -194,7 +194,7 @@ namespace BattleShipGame
         }
         
 
-        void placeShip(int x, int y)
+        void PlaceShip(int x, int y)
         {
             int counter = 0;
             DIRECTION i;
@@ -304,7 +304,7 @@ namespace BattleShipGame
                         {
                             if (sender == Playerbtn[x, y])
                             {
-                                placeShip(x, y);
+                                PlaceShip(x, y);
 
 
                             }
