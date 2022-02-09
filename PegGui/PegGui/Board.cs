@@ -8,6 +8,7 @@ namespace BattleShipGame
 		// 10x10 Board object
 
 		// Global Properties for storing current state
+    public const int SIZE = 10;
 		public GridPosition[,] board_Player;
 		public GridPosition[,] board_Other;
 
