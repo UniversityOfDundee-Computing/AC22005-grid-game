@@ -10,11 +10,11 @@ namespace BattleShipGame
     {
         // Stores a Grid Position containing a ship index or -1 for no ship as well as weather or not a position has been hit.
         public int ShipIndex { get; set; }
-        public bool hit { get; set; }
+        public bool Hit { get; set; }
 
         public GridPosition()
         {
-            hit = false;
+            Hit = false;
             ShipIndex = -1;
         }
     }

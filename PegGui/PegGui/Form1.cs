@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static BattleShipGame.Ship;
 
 namespace BattleShipGame
 {
@@ -14,35 +16,34 @@ namespace BattleShipGame
     {
         Board board;
 
+
+
         Button[,] AIbtn = new Button[10, 10];
         Button[,] Playerbtn = new Button[10, 10];
 
-        
+        int[] Ships_to_place = new int[] { 1, 0, 2, 2};
         bool placed = false;
         bool recentShip = false;
         int grayX;
         int grayY;
         int NoOfShips = 0;
 
-        public enum DIRECTION
-        {
-            UP,
-            DOWN,
-            LEFT,
-            RIGHT
-        };
+        SoundPlayer Music;
+        SoundPlayer Sfx;
 
         public PegSolitairGUI(Board b)
         {
             board = b;
             InitializeComponent();
+            Music = new SoundPlayer(PegGui.Properties.Resources.music);
+            Music.PlayLooping();
             for (int x =0; x < 10; x++)
             {
                for (int y = 0; y < 10; y++)
                 {
                     AIbtn[x, y] = new Button();
-                    AIbtn[x, y].SetBounds(120 + (40 * x), 60 + (40 * y), 43, 43);
-                    AIbtn[x, y].BackColor = Color.Red;
+                    AIbtn[x, y].SetBounds(50 + (40 * x), 60 + (40 * y), 43, 43);
+                    AIbtn[x, y].BackColor = Color.LightGoldenrodYellow;
                     AIbtn[x, y].Click += new EventHandler(this.btnEvent_Click);
                     Controls.Add(AIbtn[x, y]);
                 }
@@ -53,7 +54,7 @@ namespace BattleShipGame
                 for (int y = 0; y < 10; y++)
                 {
                     Playerbtn[x, y] = new Button();
-                    Playerbtn[x, y].SetBounds(520 + (40 * x), 60 + (40 * y), 43, 43);
+                    Playerbtn[x, y].SetBounds(540 + (40 * x), 60 + (40 * y), 43, 43);
 
                     Playerbtn[x, y].Click += new EventHandler(this.btnEvent_Click);
                     Playerbtn[x, y].BackColor = Color.LightBlue;
@@ -74,7 +75,7 @@ namespace BattleShipGame
                 }
             }
 
-            //make 5 images that disapear when ship has been placed
+            //make 7 images that disapear when ship has been placed
             Button BtnCarrier = new Button();
             Button BtnWarShip = new Button();
             Button BtnSub = new Button();
@@ -114,37 +115,62 @@ namespace BattleShipGame
             }
         }
 
-
-
+     
+        
         private void FindValid(int x, int y)
         {
             bool Valid = true;
             int loop = 0;
 
-            foreach (DIRECTION i in Enum.GetValues(typeof(DIRECTION))){
-                Console.WriteLine(i);
+            foreach (DIRECTION i in Enum.GetValues(typeof(DIRECTION)))
+            {
+
                 x = grayX;
                 y = grayY;
                 Valid = true;
                 loop = 0;
-                while (loop <4 && Valid == true)
+                while (loop < 4 && Valid == true)
                 {
-                    switch (i)
+                    while (loop < 4 && Ships_to_place[loop] == 3)
                     {
-                        case DIRECTION.UP:
-                            y--;
-                            break;
-                        case DIRECTION.DOWN:
-                            y++;
-                            break;
-                        case DIRECTION.LEFT:
-                            x--;
-                            break;
-                        case DIRECTION.RIGHT:
-                            x++;
-                            break;
+                        if (loop != 3 || Ships_to_place[3] != 3)
+                            switch (i)
+                            {
+                                case DIRECTION.UP:
+                                    y--;
+                                    break;
+                                case DIRECTION.DOWN:
+                                    y++;
+                                    break;
+                                case DIRECTION.LEFT:
+                                    x--;
+                                    break;
+                                case DIRECTION.RIGHT:
+                                    x++;
+                                    break;
+                            }
+
+                        loop++;
+
                     }
-                    if (x <0 || x  >9 || y<0 || y>9 || Playerbtn[x, y].BackColor == Color.Gray)
+                    if (loop < 4)
+                        switch (i)
+                        {
+                            case DIRECTION.UP:
+                                y--;
+                                break;
+                            case DIRECTION.DOWN:
+                                y++;
+                                break;
+                            case DIRECTION.LEFT:
+                                x--;
+                                break;
+                            case DIRECTION.RIGHT:
+                                x++;
+                                break;
+                        }
+
+                    if (x < 0 || x > 9 || y < 0 || y > 9 || Playerbtn[x, y].BackColor == Color.Gray)
                     {
                         Valid = false;
                     }
@@ -154,117 +180,89 @@ namespace BattleShipGame
                     }
                     loop++;
                 }
-                
-           }
-        }
-        
 
-        void placeShip(int x, int y)
+            }
+        }
+
+
+        void PlaceShip(int x, int y)
         {
             int counter = 0;
-            bool loop = true;
-
-
-            
-                if (x > grayX && y == grayY)
+            DIRECTION i;
+           
+            if(x > grayX)
             {
-                while (loop == true)
-                {
-                    if (x == grayX)
-                    {
-                        loop = false;
-                        recentShip = true;
-                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.RIGHT, true);
-                        NoOfShips++;
-                    }
-                    else
-                    {
-                        Playerbtn[x, y].BackColor = Color.Gray;
-                        x--;
-                        counter++;
-
-                    }
-                }
-
-
+                i = DIRECTION.LEFT;
             }
-            else if (y > grayY && x == grayX)
+            else if(y > grayY)
             {
-                while (loop == true)
+                i = DIRECTION.UP;
+            }
+            else if (x < grayX)
+            {
+                i = DIRECTION.RIGHT;
+            }
+            else
+            {
+                i = DIRECTION.DOWN;
+            }
+
+
+
+            while(x > grayX || y > grayY || x < grayX || y < grayY)
+            {
+
+                counter++;
+                Playerbtn[x, y].BackColor=Color.Gray;
+                
+                switch (i)
                 {
-                    if (y == grayY)
-                    {
-                        loop = false;
-                        recentShip = true;
-                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.DOWN, true);
-                        NoOfShips++;
-                    }
-                    else
-                    {
-                        Playerbtn[x, y].BackColor = Color.Gray;
+                    case DIRECTION.UP:
                         y--;
-                        counter++;
-                    }
-                }
-            }
-            else if (x < grayX && y == grayY)
-            {
-                while (loop == true)
-                {
-                    if (x == grayX)
-                    {
-                        loop = false;
-                        recentShip = true;
-                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.LEFT, true);
-                        NoOfShips++;
-                    }
-                    else
-                    {
-                        Playerbtn[x, y].BackColor = Color.Gray;
-                        x++;
-                        counter++;
-                    }
-                }
-            }
-            else if (y < grayY && x == grayX)
-            {
-                while (loop == true)
-                {
-                    if (y == grayY)
-                    {
-                        loop = false;
-                        recentShip = true;
-                        board.PlaceShip(ship[counter], grayX, grayY, Ship.DIRECTION.UP, true);
-                        NoOfShips++;
-                    }
-                    else
-                    {
-                        Playerbtn[x, y].BackColor = Color.Gray;
+                        break;
+                    case DIRECTION.DOWN:
                         y++;
-                        counter++;
-                    }
+                        break;
+                    case DIRECTION.LEFT:
+                        x--;
+                        break;
+                    case DIRECTION.RIGHT:
+                        x++;
+                        break;
+                        
                 }
+                
             }
 
-           switch (counter)
+            recentShip = true;
+            NoOfShips++;
+            
+
+            switch (counter)
             {
                 case 1:
-                    ship[0] = 0;
+                    Ships_to_place[0]++;
+                    board.PlaceShip(SHIP_TYPE.Patrol_Boat, grayX, grayY, i, true);
                     break;
                 case 2:
-                    if (ship[1] == 0)
+                    Ships_to_place[1]++;
+                    if (Ships_to_place[1] == 1)
                     {
-                        ship[2] = 0;
+                       board.PlaceShip(SHIP_TYPE.Destroyer, grayX, grayY ,i , true);
                     }
-                    ship[1] = 0;
+                    board.PlaceShip(SHIP_TYPE.Submarine, grayX, grayY, i, true);
                     break;
                 case 3:
-                    ship[3] = 0;
+                    Ships_to_place[2]++;
+                    board.PlaceShip(SHIP_TYPE.Battleship, grayX, grayY, i, true);
                     break;
                 case 4:
-                    ship[4] = 0;
+                    Ships_to_place[3]++;
+                    board.PlaceShip(SHIP_TYPE.Carrier, grayX, grayY, i, true);
                     break;
+
             }
+
 
             for (x = 0; x < 10; x++)
             {
@@ -281,7 +279,7 @@ namespace BattleShipGame
             }
             
             
-            if (NoOfShips == 5)
+            if (NoOfShips == 7)
             {
                 placed = true;
                 DisplayAi();
@@ -294,11 +292,11 @@ namespace BattleShipGame
 
         void btnEvent_Click(Object sender, EventArgs e)
         {
-            
 
-            if(placed == false)
+
+            if (placed == false)
             {
-                if( ((Button)sender).BackColor == Color.LightGray )
+                if (((Button)sender).BackColor == Color.LightGray)
                 {
                     for (int x = 0; x < 10; x++)
                     {
@@ -306,7 +304,7 @@ namespace BattleShipGame
                         {
                             if (sender == Playerbtn[x, y])
                             {
-                                placeShip(x, y);
+                                PlaceShip(x, y);
 
 
                             }
@@ -314,7 +312,8 @@ namespace BattleShipGame
                         }
                     }
                 }
-                else {
+                else
+                {
                     if (recentShip == false)
                     {
 
@@ -331,14 +330,14 @@ namespace BattleShipGame
 
                             }
                         }
-                        Playerbtn[grayX,grayY].BackColor = Color.LightBlue;
+                        Playerbtn[grayX, grayY].BackColor = Color.LightBlue;
                     }
                     else
                     {
                         recentShip = false;
                     }
                     ((Button)sender).BackColor = Color.Gray;
-                    
+
                     for (int x = 0; x < 10; x++)
                     {
                         for (int y = 0; y < 10; y++)
@@ -348,14 +347,14 @@ namespace BattleShipGame
                                 grayX = x;
                                 grayY = y;
                                 FindValid(x, y);
-                               
+
 
                             }
 
                         }
                     }
-                   
-                }   
+
+                }
             }
         }
 
@@ -391,6 +390,12 @@ namespace BattleShipGame
         private void BtnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About a = new About();
+            a.Show();
         }
     }
 }
