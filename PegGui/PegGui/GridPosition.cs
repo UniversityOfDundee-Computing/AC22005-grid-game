@@ -8,6 +8,7 @@ namespace BattleShipGame
 {
     public class GridPosition
     {
+        // Stores a Grid Position containing a ship index or -1 for no ship as well as weather or not a position has been hit.
         public int ShipIndex { get; set; }
         public bool Hit { get; set; }
 
