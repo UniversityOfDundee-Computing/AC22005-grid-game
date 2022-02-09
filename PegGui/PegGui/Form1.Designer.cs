@@ -1,6 +1,6 @@
 ﻿namespace BattleShipGame
 {
-    partial class PegSolitairGUI
+    partial class BattleShipMainGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PegSolitairGUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleShipMainGUI));
             this.BtnRestart = new System.Windows.Forms.Button();
             this.BtnChangeDifficutly = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -63,7 +63,7 @@
             this.BtnChangeDifficutly.TabIndex = 136;
             this.BtnChangeDifficutly.Text = "Change Difficutly";
             this.BtnChangeDifficutly.UseVisualStyleBackColor = false;
-            this.BtnChangeDifficutly.Click += new System.EventHandler(this.button1_Click);
+            this.BtnChangeDifficutly.Click += new System.EventHandler(this.Button1_Click);
             // 
             // menuStrip1
             // 
@@ -89,14 +89,14 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // BtnExit
             // 
