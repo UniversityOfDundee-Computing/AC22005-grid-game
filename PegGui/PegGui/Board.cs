@@ -5,6 +5,7 @@ namespace BattleShipGame
 {
 	public class Board
 	{ 
+		public const int SIZE = 10;
 		// 10x10 Board object¦¦¦¦¦¦¦¦¦¦¦¦
 		public GridPosition[,] board_Player;
 		public GridPosition[,] board_Other;
