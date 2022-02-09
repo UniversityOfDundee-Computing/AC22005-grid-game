@@ -8,7 +8,7 @@ namespace BattleShipGame
 		// 10x10 Board object
 
 		// Global Properties for storing current state
-    public const int SIZE = 10;
+		public const int SIZE = 10;
 		public GridPosition[,] board_Player;
 		public GridPosition[,] board_Other;
 
@@ -76,7 +76,7 @@ namespace BattleShipGame
 			}
 
 			// If the cell is already hit - fail
-			if (current_grid[_X, _Y].hit)
+			if (current_grid[_X, _Y].Hit)
 				return ACTION_STATE.ACTION_FAIL;
 
 			// If the cell contains a ship - hit
@@ -87,7 +87,7 @@ namespace BattleShipGame
 				else
 					this.otherMoves++;
 
-				current_grid[_X, _Y].hit = true;
+				current_grid[_X, _Y].Hit = true;
 				current_ship_list[current_grid[_X, _Y].ShipIndex].Hits++;
 				// Check if ship is sunk - sunk
 				if (current_ship_list[current_grid[_X, _Y].ShipIndex].Hits >= current_ship_list[current_grid[_X, _Y].ShipIndex].Length)

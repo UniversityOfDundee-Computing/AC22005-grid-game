@@ -57,11 +57,11 @@ namespace BattleShipGame
 			const bool IS_PLAYER = false;
 			if (difficuilty == DIFFICUILTY.IMPOSSIBLE) // joke difficuilty
             {
-				for (int i=0; i<board.SIZE; i++)
+				for (int i=0; i<Board.SIZE; i++)
                 {
-					for (int j=0; j<board.SIZE; j++)
+					for (int j=0; j<Board.SIZE; j++)
                     {
-						if (board.board_player[i][j].ShipIndex != -1)
+						if (board.board_Player[i,j].ShipIndex != -1)
                         {
 							if (!shots.Contains(new Coord(i,j)))
                             {
