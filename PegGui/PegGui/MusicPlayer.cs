@@ -11,13 +11,13 @@ namespace BattleShipGame
     class MusicPlayer
     {
 
-        private string FileName;
-        private string Name;
-        private IntPtr Handle;
-        private StringBuilder Buffer;
+        private readonly string FileName;
+        private readonly string Name;
+        private readonly IntPtr Handle;
+        private readonly StringBuilder Buffer = new StringBuilder();
 
         [DllImport("winmm.dll")]
-        static extern Int32 mciSendString(string command, StringBuilder buffer, int bufferSize, IntPtr hwndCallback);
+        static extern Int32 MCISendString(string command, StringBuilder buffer, int bufferSize, IntPtr hwndCallback);
 
         public MusicPlayer(string f, IntPtr handle)
         {
@@ -25,14 +25,14 @@ namespace BattleShipGame
             this.Name = Path.GetFileName(FileName);
             this.Handle = handle;
 
-            mciSendString("open \"" + FileName + "\" alias \"" + Name + "\"", Buffer, 0, IntPtr.Zero);
+            MCISendString("open \"" + FileName + "\" alias \"" + Name + "\"", Buffer, 0, IntPtr.Zero);
             Play();
         }
 
         public void Play()
         {
-            mciSendString("seek \"" + Name + "\" to start", Buffer, 0, IntPtr.Zero);
-            mciSendString("play \"" + Name + "\" notify", Buffer, 0, this.Handle);
+            MCISendString("seek \"" + Name + "\" to start", Buffer, 0, IntPtr.Zero);
+            MCISendString("play \"" + Name + "\" notify", Buffer, 0, this.Handle);
         }
     }
 }

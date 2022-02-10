@@ -14,7 +14,7 @@ namespace PegGui
         {
             // Read in current scores (this is not safe if multiple instances)
             String[] Lines = File.ReadAllLines(".scores");
-            
+
             // Build the datastructure from the lines
             List<Tuple<int, string>> Scores = new List<Tuple<int, string>>();
             foreach (string ln in Lines)
@@ -28,7 +28,7 @@ namespace PegGui
 
             // Sort it by best score
             Scores.Sort((first, second) => first.Item1.CompareTo(second.Item1));
-            
+
             // Build new file
             List<string> lines = new List<string>();
             foreach (Tuple<int, string> score in Scores)

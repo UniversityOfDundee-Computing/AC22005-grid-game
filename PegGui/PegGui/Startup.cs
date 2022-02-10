@@ -13,7 +13,7 @@ namespace BattleShipGame
 {
     public partial class Battleship : Form
     {
-        private Board board;
+        private readonly Board board;
         public Battleship(Board b)
         {
             board = b;
