@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Threading;
@@ -25,15 +26,43 @@ namespace BattleShipGame
         int OriginX;
         int OriginY;
 
-        private readonly SoundPlayer Music;
+        private readonly MusicPlayer Music;
         private SoundPlayer Sfx;
+
+
+        // MCI notification code based on https://stackoverflow.com/a/2585929/6683922
+        private const int MM_MCINOTIFY = 0x03b9;
+        private const int MCI_NOTIFY_SUCCESS = 0x01;
+        private const int MCI_NOTIFY_SUPERSEDED = 0x02;
+        private const int MCI_NOTIFY_ABORTED = 0x04;
+        private const int MCI_NOTIFY_FAILURE = 0x08;
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == MM_MCINOTIFY)
+            {
+                switch (m.WParam.ToInt32())
+                {
+                    case MCI_NOTIFY_SUCCESS:
+                        Music.Play();
+                        break;
+                }
+            }
+            base.WndProc(ref m);
+        }
+
 
         public BattleShipMainGUI(Board b)
         {
             board = b;
             InitializeComponent();
-            Music = new SoundPlayer(PegGui.Properties.Resources.music);
-            Music.PlayLooping();
+            
+            byte[] buff = new byte[PegGui.Properties.Resources.music.Length];
+            PegGui.Properties.Resources.music.Read(buff, 0, (int)PegGui.Properties.Resources.music.Length);
+            File.WriteAllBytes("music.wav", buff);
+            Music = new MusicPlayer(@"music.wav", this.Handle);
+
+
             for (int x = 0; x < Board.SIZE; x++)
             {
                 for (int y = 0; y < Board.SIZE; y++)
