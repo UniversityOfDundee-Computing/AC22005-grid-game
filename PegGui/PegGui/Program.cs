@@ -21,14 +21,16 @@ namespace BattleShipGame
             BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
             Application.Run(bsMg);
 
+            AI ai = new AI(board, AI.DIFFICUILTY.EASY);
+
             while(board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
             {
                 if (bsMg.MoveComplete)
                 {
                     if (board.playerMoves > board.otherMoves)
                     {
-                        // ai.MakeMove(); // AI's Move
-                        // bsMg.updateGrid(); // Update the grid in the gui
+                        ai.doMove(); // AI's Move
+                        bsMg.updateGrid(); // Update the grid in the gui
                     }
                     else
                     {

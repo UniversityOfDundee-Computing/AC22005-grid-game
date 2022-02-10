@@ -399,5 +399,10 @@ namespace BattleShipGame
             Thread.Sleep(500); // Just test code
             MoveComplete = true;
         }
+
+        public void updateGrid()
+        {
+            // Code relating to redrawing the grid based on the board (showing hits)
+        }
     }
 }
