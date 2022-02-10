@@ -31,22 +31,6 @@ namespace BattleShipGame
             ACTION_SHIP_SUNK
         };
 
-        // Default ships available to a player in the game
-        public Ship.SHIP_TYPE[] INITIAL_SHIPS =
-        {
-            Ship.SHIP_TYPE.Patrol_Boat,
-            Ship.SHIP_TYPE.Patrol_Boat,
-            Ship.SHIP_TYPE.Patrol_Boat,
-            Ship.SHIP_TYPE.Patrol_Boat,
-            Ship.SHIP_TYPE.Destroyer,
-            Ship.SHIP_TYPE.Destroyer,
-            Ship.SHIP_TYPE.Destroyer,
-            Ship.SHIP_TYPE.Battleship,
-            Ship.SHIP_TYPE.Battleship,
-            Ship.SHIP_TYPE.Carrier
-        };
-
-
         // Main Constructor, call the inisialiser
         public Board()
         {
