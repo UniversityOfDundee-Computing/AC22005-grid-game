@@ -104,7 +104,6 @@ namespace BattleShipGame
 				placeRandomPeg();
             } else if (difficuilty == DIFFICUILTY.MEDIUM) // random hits with trailing
 			{
-				
 				if (foundAShip) // just hit a ship
                 {
 					if (foundShip.foundDirection)
@@ -119,6 +118,7 @@ namespace BattleShipGame
 							nextX = lastHit.x + foundShip.direction.x;
 							nextY = lastHit.y + foundShip.direction.y;
                         }
+
 						Board.ACTION_STATE state = board.PlacePeg(nextX, nextY, IS_PLAYER);
 						if (state == Board.ACTION_STATE.ACTION_HIT)
                         {
@@ -131,7 +131,7 @@ namespace BattleShipGame
 							foundAShip = false;
 							foundShip = null;
                         }
-                    }            
+                    }
                 } else // random shot
                 {
 					Board.ACTION_STATE state = placeRandomPeg();
