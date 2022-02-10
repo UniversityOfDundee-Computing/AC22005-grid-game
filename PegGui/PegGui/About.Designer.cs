@@ -63,11 +63,13 @@ namespace BattleShipGame
             this.label2.Size = new System.Drawing.Size(520, 58);
             this.label2.TabIndex = 2;
             this.label2.Text = resources.GetString("label2.Text");
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(647, 127);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

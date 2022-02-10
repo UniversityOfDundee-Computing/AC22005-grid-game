@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace BattleShipGame
 {
-    public partial class About : Form
+    public partial class Help : Form
     {
-        public About()
+        public Help()
         {
             InitializeComponent();
         }
 
-        private void About_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

@@ -435,10 +435,7 @@ namespace BattleShipGame
             new Battleship(board).Show();
             BtnRestart_Click(sender, e);
         }
-        private void BtnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+       
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -483,6 +480,19 @@ namespace BattleShipGame
 
         }
 
-        
+        private void rulesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+           Help h = new Help();
+            h.Show();
+        }
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void rulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -53,6 +53,12 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Board.cs" />
+    <Compile Include="Closing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Closing.Designer.cs">
+      <DependentUpon>Closing.cs</DependentUpon>
+    </Compile>
     <Compile Include="GridPosition.cs" />
     <Compile Include="Coord.cs" />
     <Compile Include="AI.cs" />
@@ -61,6 +67,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
     </Compile>
     <Compile Include="MusicPlayer.cs" />
     <Compile Include="Program.cs" />
@@ -76,9 +88,15 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Closing.resx">
+      <DependentUpon>Closing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
