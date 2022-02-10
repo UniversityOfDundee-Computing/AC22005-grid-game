@@ -39,6 +39,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.LblTimer = new System.Windows.Forms.Label();
             this.BtnChangeSettings = new System.Windows.Forms.Button();
+            this.rulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +70,8 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.rulesToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -77,7 +79,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -130,6 +132,13 @@
             this.BtnChangeSettings.UseVisualStyleBackColor = false;
             this.BtnChangeSettings.Click += new System.EventHandler(this.BtnChangeSettings_Click);
             // 
+            // rulesToolStripMenuItem1
+            // 
+            this.rulesToolStripMenuItem1.Name = "rulesToolStripMenuItem1";
+            this.rulesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.rulesToolStripMenuItem1.Text = "Rules";
+            this.rulesToolStripMenuItem1.Click += new System.EventHandler(this.rulesToolStripMenuItem1_Click);
+            // 
             // BattleShipMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,6 +173,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label LblTimer;
         private System.Windows.Forms.Button BtnChangeSettings;
+        private System.Windows.Forms.ToolStripMenuItem rulesToolStripMenuItem1;
     }
 }
 

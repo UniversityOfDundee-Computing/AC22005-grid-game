@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BattleShipGame
+namespace PegGui
 {
-    public partial class About : Form
+    public partial class FinishScreen : Form
     {
-        public About()
+        public FinishScreen()
         {
             InitializeComponent();
-        }
-
-        private void About_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
