@@ -14,12 +14,12 @@ namespace BattleShipGame
 		private Random random;
 		private Board board;
 		private DIFFICUILTY difficuilty;
-
-		public AI(Board board, DIFFICUILTY difficuilty)
+		private List<Coord> shots = new List<Coord>(); 
+		public AI(Board board)
 		{
 			this.board = board;
-			this.difficuilty = difficuilty;
-			this.random = new Random(); // so a new random object isnt created every time i need a random number
+			this.difficuilty = board.GameDificulty;
+      this.random = new Random(); // so a new random object isnt created every time i need a random number
 		}
 
 		public enum DIFFICUILTY
@@ -78,6 +78,7 @@ namespace BattleShipGame
 
 		public bool doMove()
         {
+			this.difficuilty = board.GameDificulty;
 			const bool IS_PLAYER = false;
 			if (difficuilty == DIFFICUILTY.IMPOSSIBLE) // joke difficuilty, always hit ship
             {

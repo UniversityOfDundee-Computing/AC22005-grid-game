@@ -40,7 +40,7 @@ namespace BattleShipGame
             // 
             this.pictureBox1.Image = global::PegGui.Properties.Resources.icons8_battleship_96;
             this.pictureBox1.InitialImage = global::PegGui.Properties.Resources.icons8_battleship_96;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(96, 96);
             this.pictureBox1.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace BattleShipGame
             // 
             this.label2.Location = new System.Drawing.Point(115, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(520, 48);
+            this.label2.Size = new System.Drawing.Size(520, 58);
             this.label2.TabIndex = 2;
             this.label2.Text = resources.GetString("label2.Text");
             // 
@@ -68,7 +68,7 @@ namespace BattleShipGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 119);
+            this.ClientSize = new System.Drawing.Size(647, 127);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
