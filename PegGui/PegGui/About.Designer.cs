@@ -52,7 +52,7 @@ namespace BattleShipGame
             this.label1.Font = new System.Drawing.Font("Agency FB", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(114, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(224, 44);
+            this.label1.Size = new System.Drawing.Size(223, 44);
             this.label1.TabIndex = 1;
             this.label1.Text = "Battleships Game";
             // 
@@ -72,12 +72,14 @@ namespace BattleShipGame
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "About";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "About Battleships";
+            this.Load += new System.EventHandler(this.About_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

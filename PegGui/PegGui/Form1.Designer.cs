@@ -44,7 +44,7 @@
             // 
             // BtnRestart
             // 
-            this.BtnRestart.BackColor = System.Drawing.Color.DimGray;
+            this.BtnRestart.BackColor = System.Drawing.Color.OrangeRed;
             this.BtnRestart.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRestart.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnRestart.Location = new System.Drawing.Point(405, 481);
@@ -57,7 +57,7 @@
             // 
             // BtnChangeDifficutly
             // 
-            this.BtnChangeDifficutly.BackColor = System.Drawing.Color.DimGray;
+            this.BtnChangeDifficutly.BackColor = System.Drawing.Color.OrangeRed;
             this.BtnChangeDifficutly.Font = new System.Drawing.Font("Microsoft Tai Le", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnChangeDifficutly.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnChangeDifficutly.Location = new System.Drawing.Point(39, 483);
@@ -103,7 +103,7 @@
             // 
             // BtnExit
             // 
-            this.BtnExit.BackColor = System.Drawing.Color.DimGray;
+            this.BtnExit.BackColor = System.Drawing.Color.OrangeRed;
             this.BtnExit.Font = new System.Drawing.Font("Microsoft Tai Le", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnExit.Location = new System.Drawing.Point(776, 481);
@@ -141,8 +141,10 @@
             this.Controls.Add(this.BtnChangeDifficutly);
             this.Controls.Add(this.BtnRestart);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "BattleShipMainGUI";
             this.Text = "BattleShip";
             this.menuStrip1.ResumeLayout(false);

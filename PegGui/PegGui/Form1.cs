@@ -445,7 +445,7 @@ namespace BattleShipGame
             a.Show();
         }
 
-        
+       
 
         public void updateGrid()
         {
