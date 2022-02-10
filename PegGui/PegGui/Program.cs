@@ -14,16 +14,30 @@ namespace BattleShipGame
         [STAThread]
         static void Main()
         {
-
-            //Board b = FileIO.ReadBoardFile("cross"); // Testing code
-            //FileIO.addScore(10, "Adam", "cross"); // Testing code
-            //FileIO.getHighscores("cross"); // Testing code
             Board board = new Board();
-
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PegSolitairGUI(board));
+            BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
+            Application.Run(bsMg);
+
+            AI ai = new AI(board);
+
+            while(board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
+            {
+                if (bsMg.MoveComplete)
+                {
+                    if (board.playerMoves > board.otherMoves)
+                    {
+                        ai.doMove(); // AI's Move
+                        bsMg.updateGrid(); // Update the grid in the gui
+                    }
+                    else
+                    {
+                        bsMg.PlayMove(); // Allow the gui to make a move
+                    }
+                }
+            }
         }
     }
 }
