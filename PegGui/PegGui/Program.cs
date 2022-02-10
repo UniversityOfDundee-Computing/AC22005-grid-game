@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,11 +20,16 @@ namespace BattleShipGame
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
+            AI ai = new AI(board);
+            Thread workerThread = new Thread(new ThreadStart(() => Worker(board, bsMg, ai)));
+            workerThread.Start();
             Application.Run(bsMg);
 
-            AI ai = new AI(board);
+        }
 
-            while(board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
+        private static void Worker(Board board, BattleShipMainGUI bsMg, AI ai)
+        {
+            while (board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
             {
                 if (bsMg.MoveComplete)
                 {
@@ -34,7 +40,7 @@ namespace BattleShipGame
                     }
                     else
                     {
-                        bsMg.PlayMove(); // Allow the gui to make a move
+                        bsMg.MoveComplete = false; // Allow the gui to make a move
                     }
                 }
             }
