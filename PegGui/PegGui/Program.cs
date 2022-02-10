@@ -34,7 +34,7 @@ namespace BattleShipGame
                     }
                     else
                     {
-                        bsMg.PlayMove(); // Allow the gui to make a move
+                       // bsMg.PlayMove(); // Allow the gui to make a move
                     }
                 }
             }
