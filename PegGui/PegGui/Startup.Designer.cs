@@ -1,4 +1,4 @@
-﻿namespace PegGui
+﻿namespace BattleShipGame
 {
     partial class Battleship
     {
@@ -44,7 +44,7 @@
             this.BtnEasy.Name = "BtnEasy";
             this.BtnEasy.Size = new System.Drawing.Size(134, 42);
             this.BtnEasy.TabIndex = 0;
-            this.BtnEasy.Tag = "Easy";
+            this.BtnEasy.Tag = "0";
             this.BtnEasy.Text = "Easy";
             this.BtnEasy.UseVisualStyleBackColor = false;
             this.BtnEasy.Click += new System.EventHandler(this.BtnEasy_Click);
@@ -59,9 +59,10 @@
             this.BtnGod.Name = "BtnGod";
             this.BtnGod.Size = new System.Drawing.Size(134, 42);
             this.BtnGod.TabIndex = 1;
-            this.BtnGod.Tag = "Impossible";
+            this.BtnGod.Tag = "3";
             this.BtnGod.Text = "God";
             this.BtnGod.UseVisualStyleBackColor = false;
+            this.BtnGod.Click += new System.EventHandler(this.BtnEasy_Click);
             // 
             // BtnHard
             // 
@@ -73,9 +74,10 @@
             this.BtnHard.Name = "BtnHard";
             this.BtnHard.Size = new System.Drawing.Size(134, 42);
             this.BtnHard.TabIndex = 2;
-            this.BtnHard.Tag = "Hard";
+            this.BtnHard.Tag = "2";
             this.BtnHard.Text = "Hard";
             this.BtnHard.UseVisualStyleBackColor = false;
+            this.BtnHard.Click += new System.EventHandler(this.BtnEasy_Click);
             // 
             // BtnMedium
             // 
@@ -87,9 +89,10 @@
             this.BtnMedium.Name = "BtnMedium";
             this.BtnMedium.Size = new System.Drawing.Size(134, 42);
             this.BtnMedium.TabIndex = 3;
-            this.BtnMedium.Tag = "Medium";
+            this.BtnMedium.Tag = "1";
             this.BtnMedium.Text = "Medium";
             this.BtnMedium.UseVisualStyleBackColor = false;
+            this.BtnMedium.Click += new System.EventHandler(this.BtnEasy_Click);
             // 
             // Battleship
             // 

@@ -408,6 +408,7 @@ namespace BattleShipGame
                 }
                 MoveComplete = true;
             }
+
         }
 
 
@@ -429,11 +430,11 @@ namespace BattleShipGame
             MapSetup();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void BtnChangeSettings_Click(object sender, EventArgs e)
         {
-
+            new Battleship(board).Show();
+            BtnRestart_Click(sender, e);
         }
-
         private void BtnExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -449,7 +450,21 @@ namespace BattleShipGame
 
         public void updateGrid()
         {
+            Console.WriteLine("hi");
             // Code relating to redrawing the grid based on the board (showing hits)
+            for (int x = 0; x < Board.SIZE; x++)
+            {
+                for (int y = 0; y < Board.SIZE; y++)
+                {
+                   
+                    if (board.board_Player[x, y].Hit)
+                        if (board.board_Player[x, y].ShipIndex != -1)
+                            Playerbtn[x, y].BackColor = Color.Red;
+                        else
+                            Playerbtn[x, y].BackColor = Color.White;
+
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -467,5 +482,7 @@ namespace BattleShipGame
         {
 
         }
+
+        
     }
 }
