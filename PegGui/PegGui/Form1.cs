@@ -20,7 +20,7 @@ namespace BattleShipGame
         private readonly Button[,] Playerbtn = new Button[Board.SIZE, Board.SIZE];
 
        
-        bool placed = false;
+        public bool placed = false;
         bool recentShip = false;
         public bool MoveComplete = true;
         int OriginX;
@@ -384,7 +384,7 @@ namespace BattleShipGame
             if(((Button)sender) == AIbtn[x, y]){
                 MoveComplete = false;
                 // Code related to allowing player to make a move
-                Board.ACTION_STATE aS = board.PlacePeg(0, 0, true); // Just more test code
+                Board.ACTION_STATE aS = board.PlacePeg(x, y, true); // Just more test code
                 switch (aS)
                 {
                     case Board.ACTION_STATE.ACTION_HIT:

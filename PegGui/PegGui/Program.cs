@@ -21,6 +21,7 @@ namespace BattleShipGame
             Application.SetCompatibleTextRenderingDefault(false);
             BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
             AI ai = new AI(board);
+            ai.setShips();
             Thread workerThread = new Thread(new ThreadStart(() => Worker(board, bsMg, ai)));
             workerThread.Start();
             Application.Run(bsMg);
@@ -29,20 +30,24 @@ namespace BattleShipGame
 
         private static void Worker(Board board, BattleShipMainGUI bsMg, AI ai)
         {
-            while (board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
+            while (bsMg.Visible)
             {
-                if (bsMg.MoveComplete)
-                {
-                    if (board.playerMoves > board.otherMoves)
+                if (bsMg.placed)
+                    while (board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
                     {
-                        ai.doMove(); // AI's Move
-                        bsMg.updateGrid(); // Update the grid in the gui
+                        if (bsMg.MoveComplete)
+                        {
+                            if (board.playerMoves > board.otherMoves)
+                            {
+                                ai.doMove(); // AI's Move
+                                bsMg.updateGrid(); // Update the grid in the gui
+                            }
+                            else
+                            {
+                                bsMg.MoveComplete = false; // Allow the gui to make a move
+                            }
+                        }
                     }
-                    else
-                    {
-                        bsMg.MoveComplete = false; // Allow the gui to make a move
-                    }
-                }
             }
         }
     }
