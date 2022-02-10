@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Media;
+using System.Threading;
 using System.Windows.Forms;
 using static BattleShipGame.Ship;
 
@@ -20,6 +21,7 @@ namespace BattleShipGame
         int[] Ships_to_place = new int[] { 1, 0, 2, 2 };
         bool placed = false;
         bool recentShip = false;
+        public bool MoveComplete = true;
         int OriginX;
         int OriginY;
 
@@ -387,6 +389,15 @@ namespace BattleShipGame
         {
             About a = new About();
             a.Show();
+        }
+
+        public void PlayMove()
+        {
+            MoveComplete = false;
+            // Code related to allowing player to make a move
+
+            Thread.Sleep(500); // Just test code
+            MoveComplete = true;
         }
     }
 }

@@ -16,8 +16,8 @@ namespace BattleShipGame
         public List<Ship> otherShips = new List<Ship>();
 
         // Counters to help with scoring
-        private int playerMoves { get; set; }
-        private int otherMoves { get; set; }
+        public int playerMoves { get; set; }
+        public int otherMoves { get; set; }
 
         // Enums allowing for more legible code and allowing callers to easily know return state
         public enum ACTION_STATE

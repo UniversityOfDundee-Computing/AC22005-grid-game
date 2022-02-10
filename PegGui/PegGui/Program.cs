@@ -16,10 +16,26 @@ namespace BattleShipGame
         {
             Board board = new Board();
 
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BattleShipMainGUI(board));
+            BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
+            Application.Run(bsMg);
+
+            while(board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
+            {
+                if (bsMg.MoveComplete)
+                {
+                    if (board.playerMoves > board.otherMoves)
+                    {
+                        // ai.MakeMove(); // AI's Move
+                        // bsMg.updateGrid(); // Update the grid in the gui
+                    }
+                    else
+                    {
+                        bsMg.PlayMove(); // Allow the gui to make a move
+                    }
+                }
+            }
         }
     }
 }
