@@ -21,7 +21,7 @@ namespace BattleShipGame
             BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
             Application.Run(bsMg);
 
-            AI ai = new AI(board, AI.DIFFICUILTY.EASY);
+            AI ai = new AI(board);
 
             while(board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
             {

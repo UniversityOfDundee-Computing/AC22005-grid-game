@@ -10,10 +10,10 @@ namespace BattleShipGame
 		private Board board;
 		private DIFFICUILTY difficuilty;
 		private List<Coord> shots = new List<Coord>(); 
-		public AI(Board board, DIFFICUILTY difficuilty)
+		public AI(Board board)
 		{
 			this.board = board;
-			this.difficuilty = difficuilty;
+			this.difficuilty = board.GameDificulty;
 		}
 		public enum DIFFICUILTY
         {
@@ -54,6 +54,7 @@ namespace BattleShipGame
 
 		public bool doMove()
         {
+			this.difficuilty = board.GameDificulty;
 			const bool IS_PLAYER = false;
 			if (difficuilty == DIFFICUILTY.IMPOSSIBLE) // joke difficuilty
             {

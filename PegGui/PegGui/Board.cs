@@ -19,6 +19,8 @@ namespace BattleShipGame
         public int playerMoves { get; set; }
         public int otherMoves { get; set; }
 
+        public AI.DIFFICUILTY GameDificulty { get; set; }
+
         // Enums allowing for more legible code and allowing callers to easily know return state
         public enum ACTION_STATE
         {
