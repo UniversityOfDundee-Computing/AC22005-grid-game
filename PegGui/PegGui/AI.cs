@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace BattleShipGame
 {
 	
-
 	public class AI
 	{
 		private bool foundAShip = false;
@@ -14,12 +13,11 @@ namespace BattleShipGame
 		private Random random;
 		private Board board;
 		private DIFFICUILTY difficuilty;
-		private List<Coord> shots = new List<Coord>(); 
 		public AI(Board board)
 		{
 			this.board = board;
 			this.difficuilty = board.GameDificulty;
-      this.random = new Random(); // so a new random object isnt created every time i need a random number
+			this.random = new Random(); // so a new random object isnt created every time i need a random number
 		}
 
 		public enum DIFFICUILTY
@@ -30,14 +28,22 @@ namespace BattleShipGame
 			IMPOSSIBLE
         }
 
+		public void reset()
+        {
+			this.difficuilty = board.GameDificulty;
+			this.foundAShip = false;
+			this.foundShip = null;
+
+        }
+
 		public bool setShips()
 		{
 			const bool IS_PLAYER = false;
 			// for each ship
-			for (int i = 0; i < board.INITIAL_SHIPS.Length; i++)
+			for (int i = 0; i < Ship.DEFAULT_SHIPS.Length; i++)
             {
 
-				Ship.SHIP_TYPE ship_type = board.INITIAL_SHIPS[i];
+				Ship.SHIP_TYPE ship_type = Ship.DEFAULT_SHIPS[i];
 				// get random direction
 				Ship.DIRECTION randDir = (Ship.DIRECTION)random.Next(0, 4);
 				bool placed = false;
@@ -107,7 +113,7 @@ namespace BattleShipGame
 			{
 				if (foundAShip) // just hit a ship
                 {
-					if (foundShip.foundDirection)
+					if (foundShip.hits.Count > 1)
                     {
 						Coord lastHit = foundShip.hits[foundShip.hits.Count -1];
 						Coord direction = foundShip.direction;
@@ -132,7 +138,23 @@ namespace BattleShipGame
 							foundAShip = false;
 							foundShip = null;
                         }
-                    }
+                    } else { // shoot around a ship to find the direction
+						if (foundShip.surroundingCoords == null)
+                        {
+							foundShip.setSurroundingCoords();
+                        }
+						Coord surround = foundShip.surroundingCoords.Pop();
+						Board.ACTION_STATE state = board.PlacePeg(surround.x, surround.y, IS_PLAYER);
+
+						if (state == Board.ACTION_STATE.ACTION_HIT)
+                        {
+							foundShip.surroundingCoords = null;
+							Coord lastHit = foundShip.getLastHit();
+
+							Coord direction = new Coord((surround.x - lastHit.x), (surround.y - lastHit.y));
+							foundShip.direction = direction;
+                        }
+					}
                 } else // random shot
                 {
 					Board.ACTION_STATE state = placeRandomPeg();
@@ -148,20 +170,39 @@ namespace BattleShipGame
 		{
 			public List<Coord> hits;
 			public Coord direction;
-			public bool foundDirection;
-			public bool hitEnd; // to flip direction 4[3][2][1][5][6]  -  [] is ship N is hits
+			public Stack<Coord> surroundingCoords;
 			public FoundShip(int x, int y)
 			{
 				hits = new List<Coord>();
 				hits.Add(new Coord(x, y));
-				hitEnd = false;
-				foundDirection = false;
 			}
+			
+			// to flip direction 4[3][2][1][5][6]  -  [] is ship N is hits
 			public void reverseDirection()
             {
 				direction.x *= -1;
 				direction.y *= -1;
             }
+			public Coord getLastHit()
+            {
+				Coord lastHit = hits[hits.Count - 1];
+				return lastHit;
+            }
+			public void setSurroundingCoords()
+            {
+				surroundingCoords = new Stack<Coord>();
+				int[,] directions = { {0,1}, {1,0}, {0,-1}, {-1,0} };
+				Coord lastHit = getLastHit();
+				for (int i=0; i < 4; i++)
+                {
+					Coord newCoord = new Coord(lastHit.x+directions[i,0], lastHit.y+directions[i,1]);
+					if (newCoord.x >= 0 && newCoord.y >= 0 && newCoord.x < Board.SIZE && newCoord.y < Board.SIZE)
+                    {
+						surroundingCoords.Push(newCoord);
+                    }
+                }
+            }
+
 		}
 
 	}
