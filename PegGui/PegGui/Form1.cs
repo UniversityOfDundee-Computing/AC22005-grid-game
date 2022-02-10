@@ -447,7 +447,6 @@ namespace BattleShipGame
 
         public void updateGrid()
         {
-            Console.WriteLine("hi");
             // Code relating to redrawing the grid based on the board (showing hits)
             for (int x = 0; x < Board.SIZE; x++)
             {
