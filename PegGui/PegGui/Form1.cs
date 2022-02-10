@@ -14,17 +14,18 @@ namespace BattleShipGame
     {
         private Board board;
 
-
+        
 
         private readonly Button[,] AIbtn = new Button[Board.SIZE, Board.SIZE];
         private readonly Button[,] Playerbtn = new Button[Board.SIZE, Board.SIZE];
 
-        int[] Ships_to_place = new int[] { 1, 0, 2, 2 };
+       
         bool placed = false;
         bool recentShip = false;
         public bool MoveComplete = true;
         int OriginX;
         int OriginY;
+        
 
         private readonly MusicPlayer Music;
         private SoundPlayer Sfx;
@@ -56,7 +57,7 @@ namespace BattleShipGame
         {
             board = b;
             InitializeComponent();
-            
+
             byte[] buff = new byte[PegGui.Properties.Resources.music.Length];
             PegGui.Properties.Resources.music.Read(buff, 0, (int)PegGui.Properties.Resources.music.Length);
             File.WriteAllBytes("music.wav", buff);
@@ -70,6 +71,7 @@ namespace BattleShipGame
                     AIbtn[x, y] = new Button();
                     AIbtn[x, y].SetBounds(50 + (40 * x), 60 + (40 * y), 43, 43);
                     AIbtn[x, y].BackColor = Color.LightGoldenrodYellow;
+                    AIbtn[x, y].Tag = new Tuple<int, int>(x, y);
                     AIbtn[x, y].Click += new EventHandler(this.PlayerButtonEvent_Click);
                     Controls.Add(AIbtn[x, y]);
                 }
@@ -81,7 +83,7 @@ namespace BattleShipGame
                 {
                     Playerbtn[x, y] = new Button();
                     Playerbtn[x, y].SetBounds(540 + (40 * x), 60 + (40 * y), 43, 43);
-
+                    Playerbtn[x, y].Tag = new Tuple<int, int>(x, y);
                     Playerbtn[x, y].Click += new EventHandler(this.PlayerButtonEvent_Click);
                     Playerbtn[x, y].BackColor = Color.LightBlue;
                     Controls.Add(Playerbtn[x, y]);
@@ -171,15 +173,9 @@ namespace BattleShipGame
                 }
             }
 
-            // Commpatibility with existing code:
-            Ships_to_place = new int[Enum.GetValues(typeof(SHIP_TYPE)).Length]; // create new array
-            for (int i = 0; i < Ships_to_place.Length; i++) // Fill the array
-                Ships_to_place[i] = 3;
+          
 
-            foreach (SHIP_TYPE st in def_Ships)
-            {
-                Ships_to_place[(int)st]--; // Remove the values to produce the inverted to be placed array.
-            }
+           
 
             return def_Ships;
         }
@@ -330,6 +326,7 @@ namespace BattleShipGame
             if (board.playerShips.Count >= Ship.DEFAULT_SHIPS.Length)
             {
                 placed = true;
+                timer1.Start();
                 DisplayAi();
             }
 
@@ -338,29 +335,31 @@ namespace BattleShipGame
 
         void PlayerButtonEvent_Click(Object sender, EventArgs e)
         {
+            int x = ((Tuple<int, int>)((Button)sender).Tag).Item1;
+            int y = ((Tuple<int, int>)((Button)sender).Tag).Item2;
             if (!placed)
             {
+                
                 if (((Button)sender).BackColor == Color.LightGray)
                 {
-                    for (int x = 0; x < Board.SIZE; x++)
-                        for (int y = 0; y < Board.SIZE; y++)
-                            if (sender == Playerbtn[x, y])
-                                PlaceShip(x, y);
+
+                    if (sender == Playerbtn[x, y])
+                        PlaceShip(x, y);
                 }
                 else
                 {
                     if (!recentShip)
                     {
-                        for (int x = 0; x < Board.SIZE; x++)
+                        for(int a = 0; a < Board.SIZE; a++)
                         {
-                            for (int y = 0; y < Board.SIZE; y++)
+                            for (int b = 0; b < Board.SIZE;b++)
                             {
-                                if (Playerbtn[x, y].BackColor == Color.LightGray)
-                                {
-                                    Playerbtn[x, y].BackColor = Color.LightBlue;
-                                }
+                                if (Playerbtn[a, b].BackColor == Color.LightGray)
+                                    Playerbtn[a, b].BackColor = Color.LightBlue;
+
                             }
                         }
+                        
 
                         Playerbtn[OriginX, OriginY].BackColor = Color.LightBlue;
                     }
@@ -369,24 +368,49 @@ namespace BattleShipGame
                         recentShip = false;
                     }
 
-
-                    ((Button)sender).BackColor = Color.Gray;
-
-                    for (int x = 0; x < Board.SIZE; x++)
+                    if (board.board_Player[x, y].ShipIndex == -1)
                     {
-                        for (int y = 0; y < Board.SIZE; y++)
+                        ((Button)sender).BackColor = Color.Gray;
+                        if (sender == Playerbtn[x, y])
                         {
-                            if (sender == Playerbtn[x, y])
-                            {
-                                OriginX = x;
-                                OriginY = y;
-                                FindValid();
-                            }
+                            OriginX = x;
+                            OriginY = y;
+                            FindValid();
                         }
                     }
                 }
             }
+
+            if(((Button)sender) == AIbtn[x, y]){
+                MoveComplete = false;
+                // Code related to allowing player to make a move
+                Board.ACTION_STATE aS = board.PlacePeg(0, 0, true); // Just more test code
+                switch (aS)
+                {
+                    case Board.ACTION_STATE.ACTION_HIT:
+                        Sfx = new SoundPlayer(PegGui.Properties.Resources.expl_small);
+                        ((Button)sender).BackColor = Color.Red;
+                        Sfx.Play();
+                        break;
+                    case Board.ACTION_STATE.ACTION_MISS:
+                        Sfx = new SoundPlayer(PegGui.Properties.Resources.miss);
+                        ((Button)sender).BackColor = Color.White;
+                        Sfx.Play();
+                        break;
+                    case Board.ACTION_STATE.ACTION_SHIP_SUNK:
+                        Sfx = new SoundPlayer(PegGui.Properties.Resources.expl_big);
+                        ((Button)sender).BackColor = Color.Red;
+                        Sfx.Play();
+                        break;
+
+                    default:
+                        throw new Exception("Peg could not be placed");
+                }
+                MoveComplete = true;
+            }
         }
+
+
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -399,8 +423,9 @@ namespace BattleShipGame
             for (int x = 0; x < Board.SIZE; x++)
                 for (int y = 0; y < Board.SIZE; y++)
                     Playerbtn[x, y].BackColor = Color.LightBlue;
-            placed = false;
 
+            placed = false;
+            recentShip = false;
             MapSetup();
         }
 
@@ -420,35 +445,27 @@ namespace BattleShipGame
             a.Show();
         }
 
-        public void PlayMove()
-        {
-            MoveComplete = false;
-            // Code related to allowing player to make a move
-            Board.ACTION_STATE aS = board.PlacePeg(0, 0, true); // Just more test code
-            switch (aS)
-            {
-                case Board.ACTION_STATE.ACTION_HIT:
-                    Sfx = new SoundPlayer(PegGui.Properties.Resources.expl_small);
-                    Sfx.Play();
-                    break;
-                case Board.ACTION_STATE.ACTION_MISS:
-                    Sfx = new SoundPlayer(PegGui.Properties.Resources.miss);
-                    Sfx.Play();
-                    break;
-                case Board.ACTION_STATE.ACTION_SHIP_SUNK:
-                    Sfx = new SoundPlayer(PegGui.Properties.Resources.expl_big);
-                    Sfx.Play();
-                    break;
-
-                default:
-                    throw new Exception("Peg could not be placed");
-            }
-            MoveComplete = true;
-        }
+        
 
         public void updateGrid()
         {
             // Code relating to redrawing the grid based on the board (showing hits)
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            LblTimer.Text = Convert.ToString(Convert.ToInt32(LblTimer.Text)+1);
+        }
+
+        private void TxtClock_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
