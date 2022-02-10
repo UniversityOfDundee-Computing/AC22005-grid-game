@@ -395,8 +395,25 @@ namespace BattleShipGame
         {
             MoveComplete = false;
             // Code related to allowing player to make a move
+            Board.ACTION_STATE aS = board.PlacePeg(0, 0, true); // Just more test code
+            switch (aS)
+            {
+                case Board.ACTION_STATE.ACTION_HIT:
+                    Sfx = new SoundPlayer(PegGui.Properties.Resources.expl_small);
+                    Sfx.Play();
+                    break;
+                case Board.ACTION_STATE.ACTION_MISS:
+                    Sfx = new SoundPlayer(PegGui.Properties.Resources.miss);
+                    Sfx.Play();
+                    break;
+                case Board.ACTION_STATE.ACTION_SHIP_SUNK:
+                    Sfx = new SoundPlayer(PegGui.Properties.Resources.expl_big);
+                    Sfx.Play();
+                    break;
 
-            Thread.Sleep(500); // Just test code
+                default:
+                    throw new Exception("Peg could not be placed");
+            }
             MoveComplete = true;
         }
 
