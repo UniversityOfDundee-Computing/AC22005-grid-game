@@ -40,8 +40,8 @@ namespace BattleShipGame
 
         public SHIP_TYPE Type { get; set; } // Ship type
         public DIRECTION Direction { get; set; } // Placement direction
-        public int _X { get; set; } // Origin X coord
-        public int _Y { get; set; } // Origin Y coord
+        public int X { get; set; } // Origin X coord
+        public int Y { get; set; } // Origin Y coord
         public int Length { get; set; } // Ship Length
         public int Hits { get; set; } // Number of hits received on the ship
 
@@ -50,8 +50,8 @@ namespace BattleShipGame
         {
             this.Type = t;
             this.Direction = d;
-            this._X = x;
-            this._Y = y;
+            this.X = x;
+            this.Y = y;
             this.Hits = 0;
             this.Length = GetShipDimensions(t);
 

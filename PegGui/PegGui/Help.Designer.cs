@@ -60,7 +60,6 @@
             this.label1.Size = new System.Drawing.Size(63, 26);
             this.label1.TabIndex = 1;
             this.label1.Text = "Rules";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -80,7 +79,6 @@
             this.label3.Size = new System.Drawing.Size(326, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "5. You can tell if a ship has been destroyed if the hit sound changes";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 

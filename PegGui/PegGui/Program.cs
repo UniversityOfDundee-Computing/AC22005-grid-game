@@ -21,7 +21,7 @@ namespace BattleShipGame
             Application.SetCompatibleTextRenderingDefault(false);
             BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
             AI ai = new AI(board);
-            ai.setShips();
+            ai.SetShips();
             Thread workerThread = new Thread(new ThreadStart(() => Worker(board, bsMg, ai)));
             workerThread.Start();
             Application.Run(bsMg);
@@ -37,10 +37,10 @@ namespace BattleShipGame
                     {
                         if (bsMg.MoveComplete)
                         {
-                            if (board.playerMoves > board.otherMoves)
+                            if (board.PlayerMoves > board.OtherMoves)
                             {
-                                ai.doMove(); // AI's Move
-                                bsMg.updateGrid(); // Update the grid in the gui
+                                ai.DoMove(); // AI's Move
+                                bsMg.UpdateGrid(); // Update the grid in the gui
                             }
                             else
                             {

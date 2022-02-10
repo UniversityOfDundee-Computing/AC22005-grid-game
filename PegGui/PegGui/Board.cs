@@ -16,8 +16,8 @@ namespace BattleShipGame
         public List<Ship> otherShips = new List<Ship>();
 
         // Counters to help with scoring
-        public int playerMoves { get; set; }
-        public int otherMoves { get; set; }
+        public int PlayerMoves { get; set; }
+        public int OtherMoves { get; set; }
 
         public AI.DIFFICUILTY GameDificulty { get; set; }
 
@@ -62,9 +62,9 @@ namespace BattleShipGame
             if (current_grid[_X, _Y].ShipIndex != -1)
             {
                 if (isPlayer)
-                    this.playerMoves++;
+                    this.PlayerMoves++;
                 else
-                    this.otherMoves++;
+                    this.OtherMoves++;
 
                 current_grid[_X, _Y].Hit = true;
                 current_ship_list[current_grid[_X, _Y].ShipIndex].Hits++;
@@ -180,8 +180,8 @@ namespace BattleShipGame
         // setting up the GridPositions and initialising them correctly
         public void InitialiseBoard()
         {
-            playerMoves = 0;
-            otherMoves = 0;
+            PlayerMoves = 0;
+            OtherMoves = 0;
 
             playerShips = new List<Ship>();
             otherShips = new List<Ship>();

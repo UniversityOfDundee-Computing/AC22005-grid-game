@@ -106,7 +106,7 @@
             // timer1
             // 
             this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // LblTimer
             // 
@@ -117,7 +117,7 @@
             this.LblTimer.Size = new System.Drawing.Size(31, 35);
             this.LblTimer.TabIndex = 142;
             this.LblTimer.Text = "0";
-            this.LblTimer.Click += new System.EventHandler(this.label1_Click);
+            this.LblTimer.Click += new System.EventHandler(this.Label1_Click);
             // 
             // BtnChangeSettings
             // 
@@ -137,7 +137,7 @@
             this.rulesToolStripMenuItem1.Name = "rulesToolStripMenuItem1";
             this.rulesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.rulesToolStripMenuItem1.Text = "Rules";
-            this.rulesToolStripMenuItem1.Click += new System.EventHandler(this.rulesToolStripMenuItem1_Click);
+            this.rulesToolStripMenuItem1.Click += new System.EventHandler(this.RulesToolStripMenuItem1_Click);
             // 
             // BattleShipMainGUI
             // 

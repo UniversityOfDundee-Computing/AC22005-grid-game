@@ -12,20 +12,20 @@ namespace BattleShipGame
 {
     public partial class BattleShipMainGUI : Form
     {
-        private Board board;
+        private readonly Board board;
 
-        
+
 
         private readonly Button[,] AIbtn = new Button[Board.SIZE, Board.SIZE];
         private readonly Button[,] Playerbtn = new Button[Board.SIZE, Board.SIZE];
 
-       
+
         public bool placed = false;
         bool recentShip = false;
         public bool MoveComplete = true;
         int OriginX;
         int OriginY;
-        
+
 
         private readonly MusicPlayer Music;
         private SoundPlayer Sfx;
@@ -34,9 +34,9 @@ namespace BattleShipGame
         // MCI notification code based on https://stackoverflow.com/a/2585929/6683922
         private const int MM_MCINOTIFY = 0x03b9;
         private const int MCI_NOTIFY_SUCCESS = 0x01;
-        private const int MCI_NOTIFY_SUPERSEDED = 0x02;
+        /*private const int MCI_NOTIFY_SUPERSEDED = 0x02;
         private const int MCI_NOTIFY_ABORTED = 0x04;
-        private const int MCI_NOTIFY_FAILURE = 0x08;
+        private const int MCI_NOTIFY_FAILURE = 0x08;*/
 
         protected override void WndProc(ref Message m)
         {
@@ -173,9 +173,9 @@ namespace BattleShipGame
                 }
             }
 
-          
 
-           
+
+
 
             return def_Ships;
         }
@@ -339,7 +339,7 @@ namespace BattleShipGame
             int y = ((Tuple<int, int>)((Button)sender).Tag).Item2;
             if (!placed)
             {
-                
+
                 if (((Button)sender).BackColor == Color.LightGray)
                 {
 
@@ -350,16 +350,16 @@ namespace BattleShipGame
                 {
                     if (!recentShip)
                     {
-                        for(int a = 0; a < Board.SIZE; a++)
+                        for (int a = 0; a < Board.SIZE; a++)
                         {
-                            for (int b = 0; b < Board.SIZE;b++)
+                            for (int b = 0; b < Board.SIZE; b++)
                             {
                                 if (Playerbtn[a, b].BackColor == Color.LightGray)
                                     Playerbtn[a, b].BackColor = Color.LightBlue;
 
                             }
                         }
-                        
+
 
                         Playerbtn[OriginX, OriginY].BackColor = Color.LightBlue;
                     }
@@ -381,7 +381,8 @@ namespace BattleShipGame
                 }
             }
 
-            if(((Button)sender) == AIbtn[x, y]){
+            if (((Button)sender) == AIbtn[x, y])
+            {
                 MoveComplete = false;
                 // Code related to allowing player to make a move
                 Board.ACTION_STATE aS = board.PlacePeg(x, y, true); // Just more test code
@@ -435,7 +436,7 @@ namespace BattleShipGame
             new Battleship(board).Show();
             BtnRestart_Click(sender, e);
         }
-       
+
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -443,16 +444,16 @@ namespace BattleShipGame
             a.Show();
         }
 
-       
 
-        public void updateGrid()
+
+        public void UpdateGrid()
         {
             // Code relating to redrawing the grid based on the board (showing hits)
             for (int x = 0; x < Board.SIZE; x++)
             {
                 for (int y = 0; y < Board.SIZE; y++)
                 {
-                   
+
                     if (board.board_Player[x, y].Hit)
                         if (board.board_Player[x, y].ShipIndex != -1)
                             Playerbtn[x, y].BackColor = Color.Red;
@@ -463,10 +464,10 @@ namespace BattleShipGame
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
 
-            LblTimer.Text = Convert.ToString(Convert.ToInt32(LblTimer.Text)+1);
+            LblTimer.Text = Convert.ToString(Convert.ToInt32(LblTimer.Text) + 1);
         }
 
         private void TxtClock_TextChanged(object sender, EventArgs e)
@@ -474,14 +475,14 @@ namespace BattleShipGame
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void rulesToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void RulesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-           Help h = new Help();
+            Help h = new Help();
             h.Show();
         }
         private void BtnExit_Click(object sender, EventArgs e)
@@ -489,7 +490,7 @@ namespace BattleShipGame
             Close();
         }
 
-        private void rulesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
