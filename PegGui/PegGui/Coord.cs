@@ -4,8 +4,8 @@ namespace BattleShipGame
 {
 	public class Coord
 	{
-		int x { get; set; }
-		int y { get; set; }
+		public int x;
+		public int y;
 		public Coord(int x, int y)
 		{
 			this.x = x;
