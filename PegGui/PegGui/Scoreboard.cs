@@ -12,8 +12,12 @@ namespace BattleShipGame
         // Add score to scoreboard
         public static void SubmitScore(int Moves, int Time, bool playerWon)
         {
-            // Read in current scores (this is not safe if multiple instances)
-            String[] Lines = File.ReadAllLines(".scores");
+            String[] Lines;
+            if (!File.Exists(".scores"))
+                Lines = new string[0];
+            else
+                // Read in current scores (this is not safe if multiple instances)
+                Lines = File.ReadAllLines(".scores");
 
             // Build the datastructure from the lines
             List<Tuple<int, int, bool>> Scores = new List<Tuple<int, int, bool>>();
