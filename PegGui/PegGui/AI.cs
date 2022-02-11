@@ -8,8 +8,6 @@ namespace BattleShipGame
 
     public class AI
     {
-        private bool foundAShip = false;
-        private FoundShip foundShip;
         private readonly Random random;
         private readonly Board board;
         private DIFFICUILTY difficuilty;
@@ -26,7 +24,6 @@ namespace BattleShipGame
         public enum DIFFICUILTY
         {
             EASY,
-            MEDIUM,
             HARD,
             IMPOSSIBLE
         }
@@ -34,8 +31,6 @@ namespace BattleShipGame
         public void Reset()
         {
             this.difficuilty = board.GameDificulty;
-            this.foundAShip = false;
-            this.foundShip = null;
             this.queuedHits = new Stack<Coord>();
 
         }
@@ -114,82 +109,7 @@ namespace BattleShipGame
             else if (difficuilty == DIFFICUILTY.EASY) // random hits
             {
                 PlaceRandomPeg();
-            }
-            else if (difficuilty == DIFFICUILTY.HARD) // random hits with trailing
-            {
-                if (foundAShip) // just hit a ship
-                {
-                    if (foundShip.hits.Count > 1)
-                    {
-                        Coord lastHit = foundShip.hits[foundShip.hits.Count - 1];
-                        Coord direction = foundShip.direction;
-                        int nextX = lastHit.x + direction.x;
-                        int nextY = lastHit.y + direction.y;
-                        if (!(nextX >= 0 && nextY >= 0 && nextX < Board.SIZE && nextY < Board.SIZE))
-                        { // hit edge of board, flip direction and hit that side
-                            foundShip.ReverseDirection();
-                            nextX = lastHit.x + foundShip.direction.x;
-                            nextY = lastHit.y + foundShip.direction.y;
-                        }
-
-                        Board.ACTION_STATE state = board.PlacePeg(nextX, nextY, IS_PLAYER);
-                        if (state == Board.ACTION_STATE.ACTION_HIT)
-                        {
-                            foundShip.hits.Add(new Coord(nextX, nextY));
-                        }
-                        else if (state == Board.ACTION_STATE.ACTION_MISS) // reached end of ship
-                        {
-                            foundShip.ReverseDirection();
-                        }
-                        else if (state == Board.ACTION_STATE.ACTION_SHIP_SUNK)
-                        {
-                            foundAShip = false;
-                            foundShip = null;
-                        }
-                    }
-                    else
-                    { // shoot around a ship to find the direction
-                        if (foundShip.surroundingCoords == null)
-                        {
-                            foundShip.SetSurroundingCoords();
-                        }
-                        Coord surround = foundShip.surroundingCoords.Pop();
-                        Board.ACTION_STATE state = board.PlacePeg(surround.x, surround.y, IS_PLAYER);
-
-                        if (state == Board.ACTION_STATE.ACTION_HIT)
-                        {
-                            foundShip.surroundingCoords = null;
-                            Coord lastHit = foundShip.GetLastHit();
-
-                            Coord direction = new Coord((surround.x - lastHit.x), (surround.y - lastHit.y));
-                            foundShip.direction = direction;
-                        }
-                    }
-                }
-                else // random shot
-                {
-                    bool pegPlaced = false;
-                    Board.ACTION_STATE state = Board.ACTION_STATE.ACTION_FAIL;
-                    int randX = -1;
-                    int randY = -1;
-                    while (!pegPlaced)
-                    {
-                        randX = random.Next(0, Board.SIZE);
-                        randY = random.Next(0, Board.SIZE);
-                        state = board.PlacePeg(randX, randY, IS_PLAYER);
-                        if (state != Board.ACTION_STATE.ACTION_FAIL) // not placed ontop of ship
-                        {
-                            pegPlaced = true;
-                        }
-                    }
-
-                    if (state == Board.ACTION_STATE.ACTION_HIT)
-                    {
-                        foundAShip = true;
-                        foundShip = new FoundShip(randX, randY);
-                    }
-                }
-            } else if (difficuilty == DIFFICUILTY.MEDIUM)
+            } else if (difficuilty == DIFFICUILTY.HARD)
             {
                 // place random peg, if it hits the next hits will be the 4 surrounding pegs
                 Board.ACTION_STATE state = Board.ACTION_STATE.ACTION_FAIL;
@@ -224,47 +144,6 @@ namespace BattleShipGame
             }
             return true;
         }
-        private class FoundShip
-        {
-            public List<Coord> hits;
-            public Coord direction;
-            public Stack<Coord> surroundingCoords;
-            public FoundShip(int x, int y)
-            {
-                hits = new List<Coord>
-                {
-                    new Coord(x, y)
-                };
-            }
-
-            // to flip direction 4[3][2][1][5][6]  -  [] is ship N is hits
-            public void ReverseDirection()
-            {
-                direction.x *= -1;
-                direction.y *= -1;
-            }
-            public Coord GetLastHit()
-            {
-                Coord lastHit = hits[hits.Count - 1];
-                return lastHit;
-            }
-            public void SetSurroundingCoords()
-            {
-                surroundingCoords = new Stack<Coord>();
-                int[,] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-                Coord lastHit = GetLastHit();
-                for (int i = 0; i < 4; i++)
-                {
-                    Coord newCoord = new Coord(lastHit.x + directions[i, 0], lastHit.y + directions[i, 1]);
-                    if (newCoord.x >= 0 && newCoord.y >= 0 && newCoord.x < Board.SIZE && newCoord.y < Board.SIZE)
-                    {
-                        surroundingCoords.Push(newCoord);
-                    }
-                }
-            }
-
-        }
-
     }
 
 }
