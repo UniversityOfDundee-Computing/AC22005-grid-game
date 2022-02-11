@@ -8,16 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PegGui
+namespace BattleShipGame
 {
     public partial class Closing : Form
     {
-        public Closing()
+        private readonly int RunningTime;
+        private readonly bool PlayerWon;
+        private readonly Board bOard;
+        private readonly List<Tuple<int, string>> HighScores;
+
+        public Closing(int v, bool playerWinner, Board board, List<Tuple<int, string>> lists)
         {
+            this.RunningTime = v;
+            this.PlayerWon = playerWinner;
+            this.bOard = board;
+            this.HighScores = lists;
             InitializeComponent();
+
+            LblWinner.Text = PlayerWon ? "YOU" : "AI";
+            LblScore.Text = RunningTime.ToString();
+            LblHighScore.Text = HighScores[0].Item2;
+            LblHighTime.Text = HighScores[0].Item1.ToString();
         }
 
-        
         private void Closing_Load(object sender, EventArgs e)
         {
 
