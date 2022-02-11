@@ -19,8 +19,9 @@ namespace BattleShipGame
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            BattleShipMainGUI bsMg = new BattleShipMainGUI(board);
             AI ai = new AI(board);
+            BattleShipMainGUI bsMg = new BattleShipMainGUI(board, ai);
+            ai.Reset();
             ai.SetShips();
             Thread workerThread = new Thread(new ThreadStart(() => Worker(board, bsMg, ai)));
             workerThread.Start();

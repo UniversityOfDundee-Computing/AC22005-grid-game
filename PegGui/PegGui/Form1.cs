@@ -13,6 +13,7 @@ namespace BattleShipGame
     public partial class BattleShipMainGUI : Form
     {
         private readonly Board board;
+        private readonly AI ai;
 
 
 
@@ -53,8 +54,9 @@ namespace BattleShipGame
         }
 
 
-        public BattleShipMainGUI(Board b)
+        public BattleShipMainGUI(Board b, AI ai)
         {
+            this.ai = ai;
             board = b;
             InitializeComponent();
 
@@ -99,6 +101,7 @@ namespace BattleShipGame
                 for (int y = 0; y < Board.SIZE; y++)
                 {
                     AIbtn[x, y].Visible = false;
+                    AIbtn[x, y].BackColor = Color.LightGoldenrodYellow;
 
                 }
             }
@@ -419,6 +422,8 @@ namespace BattleShipGame
         private void BtnRestart_Click(object sender, EventArgs e)
         {
             board.InitialiseBoard();
+            ai.Reset();
+            ai.SetShips();
             for (int x = 0; x < Board.SIZE; x++)
                 for (int y = 0; y < Board.SIZE; y++)
                     Playerbtn[x, y].BackColor = Color.LightBlue;
