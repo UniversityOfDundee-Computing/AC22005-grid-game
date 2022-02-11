@@ -15,7 +15,7 @@ namespace BattleShipGame
         private readonly int RunningTime;
         private readonly bool PlayerWon;
         private readonly Board bOard;
-        private readonly List<Tuple<int, string>> HighScores;
+        private readonly List<Tuple<int, int, bool>> HighScores;
 
         public Closing(int v, bool playerWinner, Board board, List<Tuple<int, int, bool>> lists)
         {
