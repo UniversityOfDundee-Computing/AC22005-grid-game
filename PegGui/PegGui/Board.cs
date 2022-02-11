@@ -58,14 +58,15 @@ namespace BattleShipGame
             if (current_grid[_X, _Y].Hit)
                 return ACTION_STATE.ACTION_FAIL;
 
+            // Increment appropriate counter
+            if (isPlayer)
+                this.PlayerMoves++;
+            else
+                this.OtherMoves++;
+
             // If the cell contains a ship - hit
             if (current_grid[_X, _Y].ShipIndex != -1)
             {
-                if (isPlayer)
-                    this.PlayerMoves++;
-                else
-                    this.OtherMoves++;
-
                 current_grid[_X, _Y].Hit = true;
                 current_ship_list[current_grid[_X, _Y].ShipIndex].Hits++;
                 // Check if ship is sunk - sunk
