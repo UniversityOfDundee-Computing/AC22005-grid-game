@@ -182,7 +182,7 @@ namespace BattleShipGame
                             pegPlaced = true;
                         }
                     }
-                    return state;
+
                     if (state == Board.ACTION_STATE.ACTION_HIT)
                     {
                         foundAShip = true;
@@ -196,7 +196,7 @@ namespace BattleShipGame
                 Coord placedCoord;
                 while (state == Board.ACTION_STATE.ACTION_FAIL)
                 {
-                    if (queuedHits.Count() == 0)
+                    if (queuedHits.Count == 0)
                     {
                         int randX = random.Next(0, Board.SIZE);
                         int randY = random.Next(0, Board.SIZE);
@@ -212,7 +212,7 @@ namespace BattleShipGame
                         int[,] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
                         for (int i = 0; i < 4; i++)
                         {
-                            Coord newCoord = new Coord(lastHit.x + directions[i, 0], lastHit.y + directions[i, 1]);
+                            Coord newCoord = new Coord(placedCoord.x + directions[i, 0], placedCoord.y + directions[i, 1]);
                             if (newCoord.x >= 0 && newCoord.y >= 0 && newCoord.x < Board.SIZE && newCoord.y < Board.SIZE)
                             {
                                 queuedHits.Push(newCoord);
