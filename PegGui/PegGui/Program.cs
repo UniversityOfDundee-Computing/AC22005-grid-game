@@ -33,6 +33,7 @@ namespace BattleShipGame
             while (bsMg.Visible)
             {
                 if (bsMg.placed)
+                {
                     while (board.GetShipsToSink(false) > 0 && board.GetShipsToSink(true) > 0)
                     {
                         if (bsMg.MoveComplete)
@@ -48,6 +49,9 @@ namespace BattleShipGame
                             }
                         }
                     }
+
+                    bsMg.ShowEndScreen();
+                }
             }
         }
     }

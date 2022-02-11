@@ -403,9 +403,6 @@ namespace BattleShipGame
                         ((Button)sender).BackColor = Color.Red;
                         Sfx.Play();
                         break;
-
-                    default:
-                        throw new Exception("Peg could not be placed");
                 }
                 MoveComplete = true;
             }
@@ -493,6 +490,15 @@ namespace BattleShipGame
         private void RulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void ShowEndScreen()
+        {
+            bool playerWinner = board.GetShipsToSink(false) == 0;
+
+            Closing cl = new Closing(Convert.ToInt32(LblTimer.Text), playerWinner, board, Scoreboard.GetScores());
+            cl.Show();
+            this.placed = false;
         }
     }
 }

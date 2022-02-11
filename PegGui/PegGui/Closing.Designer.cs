@@ -1,4 +1,4 @@
-﻿namespace PegGui
+﻿namespace BattleShipGame
 {
     partial class Closing
     {

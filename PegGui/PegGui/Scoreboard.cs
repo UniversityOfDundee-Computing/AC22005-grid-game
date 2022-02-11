@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PegGui
+namespace BattleShipGame
 {
     class Scoreboard
     {
@@ -42,6 +42,8 @@ namespace PegGui
 
         public static List<Tuple<int, string>> GetScores()
         {
+            if (!File.Exists(".scores"))
+                return new List<Tuple<int, string>>();
             // Read in current scores (this is not safe if multiple instances)
             String[] Lines = File.ReadAllLines(".scores");
 
