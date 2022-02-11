@@ -17,7 +17,7 @@ namespace BattleShipGame
         private readonly Board bOard;
         private readonly List<Tuple<int, string>> HighScores;
 
-        public Closing(int v, bool playerWinner, Board board, List<Tuple<int, string>> lists)
+        public Closing(int v, bool playerWinner, Board board, List<Tuple<int, int, bool>> lists)
         {
             this.RunningTime = v;
             this.PlayerWon = playerWinner;
@@ -27,7 +27,7 @@ namespace BattleShipGame
 
             LblWinner.Text = PlayerWon ? "YOU" : "AI";
             LblScore.Text = RunningTime.ToString();
-            LblHighScore.Text = HighScores[0].Item2;
+            LblHighScore.Text = HighScores[0].Item2.ToString();
             LblHighTime.Text = HighScores[0].Item1.ToString();
         }
 
