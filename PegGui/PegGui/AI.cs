@@ -13,11 +13,14 @@ namespace BattleShipGame
         private readonly Random random;
         private readonly Board board;
         private DIFFICUILTY difficuilty;
+
+        private Stack<Coord> queuedHits;
         public AI(Board board)
         {
             this.board = board;
             this.difficuilty = board.GameDificulty;
             this.random = new Random(); // so a new random object isnt created every time i need a random number
+            this.queuedHits = new Stack<Coord>();
         }
 
         public enum DIFFICUILTY
@@ -33,6 +36,7 @@ namespace BattleShipGame
             this.difficuilty = board.GameDificulty;
             this.foundAShip = false;
             this.foundShip = null;
+            this.queuedHits = new Stack<Coord>();
 
         }
 
@@ -111,7 +115,7 @@ namespace BattleShipGame
             {
                 PlaceRandomPeg();
             }
-            else if (difficuilty == DIFFICUILTY.MEDIUM) // random hits with trailing
+            else if (difficuilty == DIFFICUILTY.HARD) // random hits with trailing
             {
                 if (foundAShip) // just hit a ship
                 {
@@ -164,12 +168,59 @@ namespace BattleShipGame
                 }
                 else // random shot
                 {
-                    Board.ACTION_STATE state = PlaceRandomPeg();
+                    bool pegPlaced = false;
+                    Board.ACTION_STATE state = Board.ACTION_STATE.ACTION_FAIL;
+                    int randX = -1;
+                    int randY = -1;
+                    while (!pegPlaced)
+                    {
+                        randX = random.Next(0, Board.SIZE);
+                        randY = random.Next(0, Board.SIZE);
+                        state = board.PlacePeg(randX, randY, IS_PLAYER);
+                        if (state != Board.ACTION_STATE.ACTION_FAIL) // not placed ontop of ship
+                        {
+                            pegPlaced = true;
+                        }
+                    }
+                    return state;
                     if (state == Board.ACTION_STATE.ACTION_HIT)
                     {
                         foundAShip = true;
+                        foundShip = new FoundShip(randX, randY);
                     }
                 }
+            } else if (difficuilty == DIFFICUILTY.MEDIUM)
+            {
+                // place random peg, if it hits the next hits will be the 4 surrounding pegs
+                Board.ACTION_STATE state = Board.ACTION_STATE.ACTION_FAIL;
+                Coord placedCoord;
+                while (state == Board.ACTION_STATE.ACTION_FAIL)
+                {
+                    if (queuedHits.Count() == 0)
+                    {
+                        int randX = random.Next(0, Board.SIZE);
+                        int randY = random.Next(0, Board.SIZE);
+                        placedCoord = new Coord(randX, randY);
+                    } else
+                    {
+                        placedCoord = queuedHits.Pop();
+                    }
+                    state = board.PlacePeg(placedCoord.x, placedCoord.y, IS_PLAYER);
+
+                    if (state == Board.ACTION_STATE.ACTION_HIT)
+                    {
+                        int[,] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Coord newCoord = new Coord(lastHit.x + directions[i, 0], lastHit.y + directions[i, 1]);
+                            if (newCoord.x >= 0 && newCoord.y >= 0 && newCoord.x < Board.SIZE && newCoord.y < Board.SIZE)
+                            {
+                                queuedHits.Push(newCoord);
+                            }
+                        }
+                    }
+                }
+                
             }
             return true;
         }
