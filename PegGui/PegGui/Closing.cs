@@ -26,6 +26,7 @@ namespace BattleShipGame
             InitializeComponent();
 
             LblWinner.Text = PlayerWon ? "YOU" : "AI";
+            LblScore.Text = bOard.PlayerMoves.ToString();
             LblScore.Text = RunningTime.ToString();
             LblHighScore.Text = HighScores[0].Item2.ToString();
             LblHighTime.Text = HighScores[0].Item1.ToString();
