@@ -59,6 +59,7 @@ namespace BattleShipGame
             this.ai = ai;
             board = b;
             InitializeComponent();
+            new Battleship(board).Show();
 
             byte[] buff = new byte[PegGui.Properties.Resources.music.Length];
             PegGui.Properties.Resources.music.Read(buff, 0, (int)PegGui.Properties.Resources.music.Length);
