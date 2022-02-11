@@ -502,8 +502,14 @@ namespace BattleShipGame
         {
             bool playerWinner = board.GetShipsToSink(false) == 0;
             Scoreboard.SubmitScore(board.PlayerMoves, Convert.ToInt32(LblTimer.Text), playerWinner);
+
+            // Last minute removed due to major bug
             //Closing cl = new Closing(Convert.ToInt32(LblTimer.Text), playerWinner, board, Scoreboard.GetScores());
             //cl.Show();
+
+            MessageBox.Show("Game Over! - " + (playerWinner ? "YOU" : "COMPUTER") + " Won!");
+
+
             this.placed = false;
         }
     }
